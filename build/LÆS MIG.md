@@ -2,7 +2,7 @@
 
 Siden `hookes-lov-journal.html` bygges ud fra en PDF og en liste med lærerkommentarer.
 Resultatet er én selvstændig HTML-fil, der virker offline og kan lægges på Lectio/Teams.
-Den ligger også på hjemmesiden https://mosskov.github.io/moensterbesvarelser/ (se Publicering nederst).
+Den kan også lægges på hjemmesiden https://mosskov.github.io/moensterbesvarelser/ (se Publicering nederst).
 
 ## Ny journal (fx en anonymiseret elevjournal)
 
@@ -32,6 +32,10 @@ Journalen er bygget af scripts, så den kan ændres og bygges igen:
 Skitsen `journal/figur1-skitse.png` er et skærmbillede af `build/figur1-skitse.html`.
 
 ## Publicering (GitHub Pages)
+
+Første gang (ikke gjort endnu):
+`gh repo create Mosskov/moensterbesvarelser --public --source . --push` og derefter
+`gh api -X POST repos/Mosskov/moensterbesvarelser/pages -f "source[branch]=main" -f "source[path]=/"`
 
 Hjemmesiden er repoet `Mosskov/moensterbesvarelser`. Forsiden er `index.html` i roden.
 GitHub bygger siden igen, hver gang der bliver pushet til `main`.
