@@ -77,6 +77,10 @@ h2 { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: v
 .doc h3 { font: 700 19px/1.25 var(--doc); margin: 2px 0 0; }
 .doc p { margin: 0; color: var(--ink-2); font-size: 14px; }
 .doc .go { margin-top: 4px; color: var(--pen); font-weight: 600; font-size: 14px; }
+.doc.soon { background: transparent; border-style: dashed; box-shadow: none; }
+.doc.soon:hover { border-color: var(--rule); transform: none; }
+.doc.soon h3 { font: 600 15px/1.3 var(--sans); color: var(--muted); }
+.doc.soon p { color: var(--muted); }
 
 footer { margin: 44px 0 28px; color: var(--muted); font-size: 13px; }
 @media (prefers-reduced-motion: reduce) { .doc { transition: none; } .doc:hover { transform: none; } }
@@ -100,7 +104,7 @@ footer { margin: 44px 0 28px; color: var(--muted); font-size: 13px; }
   </header>
 
   <main>
-    <!-- Nyt dokument: kopiér et <a class="doc">-kort. Nyt fag: kopiér en hel <section>. -->
+    <!-- Nyt dokument: kopiér et <a class="doc">-kort, og slet fagets "soon"-kort. Nyt fag: kopiér en hel <section>. -->
     <section aria-labelledby="fag-fysik">
       <h2 id="fag-fysik">Fysik</h2>
       <div class="grid">
@@ -110,6 +114,27 @@ footer { margin: 44px 0 28px; color: var(--muted); font-size: 13px; }
           <p>Fysik C. Bestemmelse af fjederkonstanten for en skruefjeder med lodder og lineal, med graf i Excel og fejlkilder.</p>
           <span class="go">Åbn journalen →</span>
         </a>
+      </div>
+    </section>
+
+    <section aria-labelledby="fag-matematik">
+      <h2 id="fag-matematik">Matematik</h2>
+      <div class="grid">
+        <div class="doc soon"><h3>Eksempler på vej</h3><p>Der kommer mønsterbesvarelser i matematik her.</p></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="fag-kemi">
+      <h2 id="fag-kemi">Kemi</h2>
+      <div class="grid">
+        <div class="doc soon"><h3>Eksempler på vej</h3><p>Der kommer mønsterbesvarelser i kemi her.</p></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="fag-biologi">
+      <h2 id="fag-biologi">Biologi</h2>
+      <div class="grid">
+        <div class="doc soon"><h3>Eksempler på vej</h3><p>Der kommer mønsterbesvarelser i biologi her.</p></div>
       </div>
     </section>
   </main>
