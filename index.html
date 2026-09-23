@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mønsterbesvarelser</title>
+<meta name="description" content="Eksempler på gode afleveringer med lærerkommentarer.">
+<script>
+  try { var t = localStorage.getItem("hooke-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
+<style>
+/* Samme farver og tema som journalsiderne (build/showroom-template.html) */
+:root {
+  color-scheme: light;
+  --ground: #E8ECF1; --paper: #FFFFFF; --ink: #18202B; --ink-2: #465262; --muted: #6A7584;
+  --rule: #D3DAE2; --pen: #1F4FA3; --pen-soft: #E3EBF9; --teacher: #B8234A; --teacher-bg: #FFF4F6;
+  --focus: #1F4FA3;
+  --shadow: 0 1px 2px rgba(24,32,43,.06), 0 8px 24px rgba(24,32,43,.07);
+  --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
+  --doc: Cambria, "Iowan Old Style", Georgia, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #11151B; --paper: #1A2029; --ink: #E7EBF1; --ink-2: #B4BDC9; --muted: #8D97A4;
+    --rule: #2F3845; --pen: #86ABF2; --pen-soft: #1F2C45; --teacher: #FF8DA7; --teacher-bg: #2A1C23;
+    --focus: #86ABF2;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #11151B; --paper: #1A2029; --ink: #E7EBF1; --ink-2: #B4BDC9; --muted: #8D97A4;
+  --rule: #2F3845; --pen: #86ABF2; --pen-soft: #1F2C45; --teacher: #FF8DA7; --teacher-bg: #2A1C23;
+  --focus: #86ABF2;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font: 15px/1.55 var(--sans);
+  padding-inline: 16px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+a { color: var(--pen); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+h1, h2 { text-wrap: balance; }
+.wrap { max-width: 900px; margin-inline: auto; }
+
+header { padding: 36px 0 8px; display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: flex-end; justify-content: space-between; }
+h1 { font: 700 34px/1.15 var(--doc); margin: 0 0 6px; letter-spacing: -.01em; }
+.lede { margin: 0; color: var(--ink-2); max-width: 56ch; }
+
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 7px; overflow: hidden; background: var(--paper); }
+.seg button { font: 500 13px var(--sans); border: 0; background: transparent; color: var(--ink-2); padding: 6px 11px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.seg button + button { border-left: 1px solid var(--rule); }
+.seg button:hover { color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--pen-soft); color: var(--pen); font-weight: 600; }
+.seg svg { width: 15px; height: 15px; flex: none; }
+
+section { margin-top: 28px; }
+h2 { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 0 10px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.doc {
+  display: flex; flex-direction: column; gap: 6px;
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 10px;
+  padding: 16px 18px; box-shadow: var(--shadow);
+  color: inherit; text-decoration: none;
+  transition: border-color .15s, transform .15s;
+}
+.doc:hover { border-color: var(--pen); transform: translateY(-1px); }
+.doc .type { font-size: 12px; font-weight: 600; color: var(--teacher); background: var(--teacher-bg); align-self: flex-start; padding: 2px 8px; border-radius: 99px; }
+.doc h3 { font: 700 19px/1.25 var(--doc); margin: 2px 0 0; }
+.doc p { margin: 0; color: var(--ink-2); font-size: 14px; }
+.doc .go { margin-top: 4px; color: var(--pen); font-weight: 600; font-size: 14px; }
+
+footer { margin: 44px 0 28px; color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { .doc { transition: none; } .doc:hover { transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Mønsterbesvarelser</h1>
+      <p class="lede">Eksempler på gode afleveringer med lærerens kommentarer. Klik på et dokument og se, hvad der gør det godt.</p>
+    </div>
+    <div class="seg" role="group" aria-label="Tema">
+      <button type="button" data-theme-set="auto" aria-pressed="true" title="Følg enhedens indstilling">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>Auto</button>
+      <button type="button" data-theme-set="light" aria-pressed="false" title="Lyst tema">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>Lys</button>
+      <button type="button" data-theme-set="dark" aria-pressed="false" title="Mørkt tema">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Mørk</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Nyt dokument: kopiér et <a class="doc">-kort. Nyt fag: kopiér en hel <section>. -->
+    <section aria-labelledby="fag-fysik">
+      <h2 id="fag-fysik">Fysik</h2>
+      <div class="grid">
+        <a class="doc" href="hookes-lov-journal.html">
+          <span class="type">Journal</span>
+          <h3>Hookes lov</h3>
+          <p>Fysik C. Bestemmelse af fjederkonstanten for en skruefjeder med lodder og lineal, med graf i Excel og fejlkilder.</p>
+          <span class="go">Åbn journalen →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>Dokumenterne kan også hentes som PDF og Word inde på hver side.</footer>
+</div>
+<script>
+  (function () {
+    var root = document.documentElement, btns = document.querySelectorAll("[data-theme-set]");
+    function setTheme(t) {
+      if (t === "auto") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", t);
+      btns.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-theme-set") === t); });
+      try { localStorage.setItem("hooke-theme", t); } catch (e) {}
+    }
+    btns.forEach(function (b) { b.addEventListener("click", function () { setTheme(b.getAttribute("data-theme-set")); }); });
+    setTheme(root.getAttribute("data-theme") || "auto");
+  })();
+</script>
+</body>
+</html>

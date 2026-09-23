@@ -1,7 +1,8 @@
-# Sådan fodres en journal ind i showroom-siden
+# Sådan fodres en journal ind i Mønsterbesvarelser
 
 Siden `hookes-lov-journal.html` bygges ud fra en PDF og en liste med lærerkommentarer.
 Resultatet er én selvstændig HTML-fil, der virker offline og kan lægges på Lectio/Teams.
+Den ligger også på hjemmesiden https://mosskov.github.io/moensterbesvarelser/ (se Publicering nederst).
 
 ## Ny journal (fx en anonymiseret elevjournal)
 
@@ -29,3 +30,12 @@ Journalen er bygget af scripts, så den kan ændres og bygges igen:
 4. `python build/build_html.py`
 
 Skitsen `journal/figur1-skitse.png` er et skærmbillede af `build/figur1-skitse.html`.
+
+## Publicering (GitHub Pages)
+
+Hjemmesiden er repoet `Mosskov/moensterbesvarelser`. Forsiden er `index.html` i roden.
+GitHub bygger siden igen, hver gang der bliver pushet til `main`.
+
+1. Ret skabelonen eller kommentarfilen, og kør `python build/build_html.py ...`
+2. Er det et nyt dokument, så tilføj et kort i `index.html` (kopiér et `<a class="doc">`, eller en hel `<section>` til et nyt fag)
+3. `git add -A`, `git commit -m "..."` og `git push`. Siden er opdateret efter et minut eller to.
