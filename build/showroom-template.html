@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hookes lov-journalen</title>
+<script>
+  try { var t = localStorage.getItem("hooke-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
+<style>
+:root {
+  color-scheme: light;
+  --ground: #E8ECF1;
+  --paper: #FFFFFF;
+  --ink: #18202B;
+  --ink-2: #465262;
+  --muted: #6A7584;
+  --rule: #D3DAE2;
+  --rule-soft: #E7EBF0;
+  --pen: #1F4FA3;
+  --pen-soft: #E3EBF9;
+  --teacher: #B8234A;
+  --teacher-bg: #FFF4F6;
+  --good: #1D7445;
+  --good-bg: #E5F3EA;
+  --weak: #9A5400;
+  --weak-bg: #FCF0DE;
+  --xl: #1E7145;
+  --xl-soft: #DCEFE3;
+  --xl-sel: #C6E6D2;
+  --xl-chrome: #F3F3F3;
+  --focus: #1F4FA3;
+  --canvas: #D5DAE1;
+  --shadow: 0 1px 2px rgba(24,32,43,.06), 0 8px 24px rgba(24,32,43,.07);
+  --card-shadow: 0 10px 30px rgba(24,32,43,.16);
+  --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
+  --doc: Cambria, "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --calibri: Aptos, Calibri, "Segoe UI", Carlito, Arial, sans-serif;
+  --mono: "Cascadia Mono", Consolas, ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #11151B; --paper: #1A2029; --ink: #E7EBF1; --ink-2: #B4BDC9; --muted: #8D97A4;
+    --rule: #2F3845; --rule-soft: #252D38; --pen: #86ABF2; --pen-soft: #1F2C45;
+    --teacher: #FF8DA7; --teacher-bg: #2A1C23;
+    --good: #72D29E; --good-bg: #15301F; --weak: #F1B25E; --weak-bg: #33260F;
+    --xl: #4CB67A; --xl-soft: #173323; --xl-sel: #1F4A31; --xl-chrome: #232A34;
+    --focus: #86ABF2; --canvas: #0B0E12;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    --card-shadow: 0 10px 30px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #11151B; --paper: #1A2029; --ink: #E7EBF1; --ink-2: #B4BDC9; --muted: #8D97A4;
+  --rule: #2F3845; --rule-soft: #252D38; --pen: #86ABF2; --pen-soft: #1F2C45;
+  --teacher: #FF8DA7; --teacher-bg: #2A1C23;
+  --good: #72D29E; --good-bg: #15301F; --weak: #F1B25E; --weak-bg: #33260F;
+  --xl: #4CB67A; --xl-soft: #173323; --xl-sel: #1F4A31; --xl-chrome: #232A34;
+  --focus: #86ABF2; --canvas: #0B0E12;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  --card-shadow: 0 10px 30px rgba(0,0,0,.5);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font: 15px/1.55 var(--sans);
+  padding-inline: 16px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+a { color: var(--pen); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+h1, h2, h3 { text-wrap: balance; }
+.wrap { max-width: 1200px; margin-inline: auto; }
+
+/* ---------- Intro ---------- */
+.intro { padding-block: 40px 28px; display: grid; gap: 24px; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: end; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 0 8px; }
+.intro h1 { font-family: var(--doc); font-size: clamp(28px, 4.2vw, 42px); line-height: 1.12; margin: 0 0 12px; font-weight: 700; letter-spacing: -.01em; }
+.intro .lead { margin: 0; color: var(--ink-2); font-size: 16.5px; max-width: 58ch; }
+.howto { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 20px; }
+.howto h2 { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 10px; color: var(--ink-2); }
+.howto ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; color: var(--ink-2); }
+.howto b { color: var(--ink); }
+.dot { display: inline-grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; background: var(--teacher); color: var(--paper); font: 700 10px/1 var(--sans); vertical-align: 1px; }
+
+/* ---------- Toolbar ---------- */
+.toolbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  margin-inline: -16px; padding: 8px 16px;
+  background: color-mix(in srgb, var(--ground) 90%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.toolbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 8px 20px; flex-wrap: wrap; }
+.jump { display: flex; gap: 2px; flex-wrap: wrap; }
+.jump a { text-decoration: none; color: var(--ink-2); font-size: 14px; padding: 6px 10px; border-radius: 6px; }
+.jump a:hover { background: var(--rule-soft); color: var(--ink); }
+.controls { display: flex; align-items: center; gap: 8px 18px; flex-wrap: wrap; }
+.ctl { display: flex; align-items: center; gap: 8px; }
+.ctl-l { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 7px; overflow: hidden; background: var(--paper); }
+.seg button { font: 500 13px var(--sans); border: 0; background: transparent; color: var(--ink-2); padding: 6px 11px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.seg button + button { border-left: 1px solid var(--rule); }
+.seg button:hover { color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--pen-soft); color: var(--pen); font-weight: 600; }
+.seg.tc button[aria-pressed="true"] { background: var(--teacher-bg); color: var(--teacher); }
+.seg svg { width: 15px; height: 15px; flex: none; }
+
+/* ---------- Section heads ---------- */
+.part { padding-block: 44px 8px; }
+.part-head { max-width: 1200px; margin: 0 auto 20px; display: flex; justify-content: space-between; align-items: end; gap: 12px 24px; flex-wrap: wrap; }
+.part-head h2 { font-family: var(--doc); font-size: 28px; line-height: 1.2; margin: 0 0 6px; }
+.part-head p { margin: 0; color: var(--ink-2); max-width: 65ch; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn { font: 600 13.5px var(--sans); color: var(--ink-2); background: var(--paper); border: 1px solid var(--rule); border-radius: 7px; padding: 7px 13px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+.btn:hover { color: var(--ink); border-color: var(--muted); }
+.btn.primary { background: var(--teacher); border-color: var(--teacher); color: var(--paper); }
+.btn.primary:hover { color: var(--paper); filter: brightness(1.08); }
+.btn:disabled { opacity: .45; cursor: default; filter: none; }
+.btn svg { width: 15px; height: 15px; }
+
+/* ---------- Document viewer ---------- */
+.viewer {
+  max-width: 1200px; margin-inline: auto; background: var(--canvas); border: 1px solid var(--rule); border-radius: 10px;
+  padding: 28px 24px; display: grid; grid-template-columns: minmax(0, 800px) minmax(0, 340px); justify-content: center; gap: 0 28px;
+}
+.pages { display: grid; gap: 22px; min-width: 0; }
+.page { position: relative; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.18), 0 6px 18px rgba(0,0,0,.08); }
+.page img { display: block; width: 100%; height: auto; }
+.layer { position: absolute; inset: 0; }
+.hl-rect { position: absolute; border-radius: 3px; background: rgba(184, 35, 74, .13); box-shadow: 0 0 0 1.5px rgba(184, 35, 74, .55); pointer-events: none; opacity: 0; transition: opacity .18s; }
+.hl-rect.on { opacity: 1; }
+.lead-line { position: absolute; height: 0; border-top: 1.5px dashed rgba(184, 35, 74, .7); pointer-events: none; }
+.marker {
+  position: absolute; width: 22px; height: 22px; margin: -11px 0 0 5px; border-radius: 50%;
+  border: 2px solid #B8234A; background: #fff; color: #B8234A; font: 700 11px/18px var(--sans); text-align: center;
+  cursor: pointer; padding: 0; box-shadow: 0 1px 4px rgba(0,0,0,.2); transition: transform .12s, background .12s;
+}
+.marker:hover { transform: scale(1.12); }
+.marker.on { background: #B8234A; color: #fff; transform: scale(1.12); }
+.marker:focus-visible { outline: 2px solid #1F4FA3; outline-offset: 2px; }
+.no-markers .marker, .no-markers .hl-rect, .no-markers .lead-line { display: none; }
+
+.rail { position: relative; min-width: 0; }
+.rail-empty { position: sticky; top: 90px; color: var(--muted); font-size: 14px; padding: 14px 16px; border: 1px dashed var(--rule); border-radius: 10px; background: color-mix(in srgb, var(--paper) 60%, transparent); }
+.rail-empty b { color: var(--ink); }
+.card {
+  position: absolute; left: 0; right: 0; z-index: 5;
+  background: var(--paper); color: var(--ink); border: 1.5px solid var(--teacher); border-radius: 10px;
+  box-shadow: var(--card-shadow); padding: 12px 14px; font-size: 14.5px; line-height: 1.5;
+  animation: card-in .16s ease-out;
+}
+.card::before {
+  content: ""; position: absolute; left: -8px; top: var(--ay, 24px); width: 14px; height: 14px; margin-top: -7px;
+  background: var(--paper); border-left: 1.5px solid var(--teacher); border-bottom: 1.5px solid var(--teacher); transform: rotate(45deg);
+}
+@keyframes card-in { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
+.nh { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.nh b { font-size: 14px; }
+.nh .nn { margin-left: auto; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.av { width: 26px; height: 26px; border-radius: 50%; background: var(--teacher); color: var(--paper); font: 700 12px/26px var(--sans); text-align: center; flex: none; }
+.x { border: 0; background: transparent; color: var(--muted); font: 20px/1 var(--sans); width: 28px; height: 28px; border-radius: 6px; cursor: pointer; }
+.x:hover { background: var(--rule-soft); color: var(--ink); }
+.card-b p { margin: 0 0 10px; }
+.card-f { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 4px; }
+.card-f .hint { font-size: 12px; color: var(--muted); }
+.pitfall { border: 1px solid var(--rule); background: var(--paper); border-radius: 8px; padding: 10px 12px 12px; font-size: 13.5px; line-height: 1.45; display: grid; gap: 8px; margin: 0 0 10px; }
+.pitfall h4 { margin: 0; font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.pf { border-radius: 6px; padding: 7px 10px; }
+.pf .tag { display: block; font-weight: 700; font-size: 12px; margin-bottom: 1px; }
+.pf.weak { background: var(--weak-bg); }
+.pf.weak .tag { color: var(--weak); }
+.pf.strong { background: var(--good-bg); }
+.pf.strong .tag { color: var(--good); }
+
+/* ---------- Excel guide ---------- */
+.steps { max-width: 1200px; margin-inline: auto; display: grid; gap: 18px; }
+.step {
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 22px 24px;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 20px 32px; align-items: start;
+}
+.step-text h3 { font-size: 18px; margin: 0 0 8px; display: flex; gap: 10px; align-items: baseline; }
+.step-no { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--xl); color: #fff; font: 700 14px/28px var(--sans); text-align: center; transform: translateY(-2px); }
+.step-text p, .step-text ul, .step-text ol { margin: 0 0 10px; color: var(--ink-2); }
+.step-text ul, .step-text ol { padding-left: 20px; }
+.step-text li { margin-bottom: 4px; }
+.path { font-weight: 600; color: var(--ink); }
+.path .sep { color: var(--muted); font-weight: 400; margin-inline: 4px; }
+.tipbox { border-radius: 8px; padding: 10px 12px; font-size: 14px; background: var(--weak-bg); color: var(--ink); }
+.tipbox b { color: var(--weak); }
+.tipbox.good { background: var(--good-bg); }
+.tipbox.good b { color: var(--good); }
+.calc { background: var(--rule-soft); border-radius: 4px; padding: 10px 14px; margin: 0 0 12px; font-size: 15.5px; }
+kbd { font: 600 12px var(--mono); border: 1px solid var(--rule); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: var(--rule-soft); color: var(--ink); }
+.xl-scroll { overflow-x: auto; }
+.xl { font-family: var(--calibri); font-size: 12.5px; color: var(--ink); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--paper); min-width: 360px; position: relative; box-shadow: var(--shadow); }
+.xl-title { background: var(--xl); color: #fff; font: 600 12px var(--sans); padding: 6px 12px; display: flex; justify-content: space-between; }
+.xl-title span:last-child { opacity: .8; font-weight: 400; }
+.xl-tabs { display: flex; gap: 2px; background: var(--xl-chrome); padding: 4px 8px 0; border-bottom: 1px solid var(--rule); overflow: hidden; }
+.xl-tabs span { padding: 4px 8px 6px; color: var(--ink-2); white-space: nowrap; }
+.xl-tabs span.on { color: var(--xl); font-weight: 700; box-shadow: inset 0 -3px 0 var(--xl); }
+.xl-ribbon { display: flex; gap: 0; background: var(--xl-chrome); padding: 6px 8px 4px; border-bottom: 1px solid var(--rule); min-height: 64px; }
+.xl-group { display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 0 10px; border-right: 1px solid var(--rule); gap: 4px; }
+.xl-group .icons { display: flex; gap: 4px; align-items: center; }
+.xl-group .gname { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.xl-ico { width: 28px; height: 28px; border-radius: 4px; display: grid; place-items: center; position: relative; }
+.xl-ico svg { width: 22px; height: 22px; }
+.xl-ico svg * { fill: none; stroke: var(--ink-2); stroke-width: 1.5; }
+.xl-ico svg .f { fill: var(--ink-2); stroke: none; }
+.xl-formula { display: flex; border-bottom: 1px solid var(--rule); font-size: 12px; }
+.xl-formula .nb { width: 64px; padding: 3px 8px; border-right: 1px solid var(--rule); color: var(--ink-2); }
+.xl-formula .fx { padding: 3px 8px; color: var(--muted); font-style: italic; border-right: 1px solid var(--rule); }
+.xl-formula .val { padding: 3px 8px; }
+.xl-grid { display: grid; grid-template-columns: 34px repeat(4, minmax(64px, 1fr)); font-variant-numeric: tabular-nums; position: relative; }
+.xl-grid > div { border-right: 1px solid var(--rule-soft); border-bottom: 1px solid var(--rule-soft); padding: 2px 6px; height: 22px; white-space: nowrap; overflow: hidden; }
+.xl-grid .h { background: var(--xl-chrome); color: var(--muted); text-align: center; font-size: 11.5px; border-color: var(--rule); }
+.xl-grid .n { text-align: right; }
+.xl-grid .b { font-weight: 700; }
+.xl-grid .sel { background: var(--xl-sel); }
+.xl-grid .h.selh { background: color-mix(in srgb, var(--xl) 22%, var(--xl-chrome)); color: var(--xl); font-weight: 700; }
+.xl-grid .cur { box-shadow: inset 0 0 0 2px var(--xl); }
+.xl-body { position: relative; }
+.ring { box-shadow: 0 0 0 2px var(--teacher), 0 0 0 5px color-mix(in srgb, var(--teacher) 22%, transparent); border-radius: 4px; }
+.mark { position: absolute; width: 20px; height: 20px; border-radius: 50%; background: var(--teacher); color: #fff; font: 700 11.5px/20px var(--sans); text-align: center; z-index: 3; box-shadow: 0 0 0 2px var(--paper); }
+.xl-pop { position: absolute; background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; box-shadow: var(--shadow); z-index: 2; padding: 6px; font-size: 12px; }
+.xl-pop .ph { font-size: 11px; color: var(--muted); font-weight: 700; padding: 2px 4px 4px; }
+.thumbs { display: flex; gap: 4px; }
+.thumb { width: 38px; height: 32px; border: 1px solid var(--rule); border-radius: 3px; display: grid; place-items: center; }
+.thumb svg { width: 30px; height: 24px; }
+.thumb svg * { fill: none; stroke: var(--ink-2); stroke-width: 1.2; }
+.thumb svg .f { fill: var(--xl); stroke: none; }
+.menu { list-style: none; margin: 0; padding: 0; min-width: 190px; }
+.menu li { padding: 4px 10px 4px 26px; border-radius: 3px; white-space: nowrap; color: var(--ink); }
+.menu li.dim { color: var(--muted); }
+.menu li.sepl { border-top: 1px solid var(--rule-soft); margin-top: 3px; padding-top: 6px; }
+.menu li.hi { background: var(--xl-soft); font-weight: 600; }
+.chk { display: flex; align-items: center; gap: 7px; padding: 3px 6px; white-space: nowrap; }
+.box { width: 13px; height: 13px; border: 1.3px solid var(--ink-2); border-radius: 2px; display: inline-grid; place-items: center; flex: none; background: var(--paper); }
+.box.on { background: var(--xl); border-color: var(--xl); }
+.box.on::after { content: ""; width: 7px; height: 4px; border: 2px solid #fff; border-top: 0; border-right: 0; transform: rotate(-45deg) translate(1px, -1px); }
+.radio { width: 13px; height: 13px; border: 1.3px solid var(--ink-2); border-radius: 50%; display: inline-grid; place-items: center; flex: none; }
+.radio.on { border-color: var(--xl); }
+.radio.on::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--xl); }
+.xl-chartarea { padding: 14px; background: var(--xl-chrome); position: relative; }
+.xl-chart { background: var(--paper); border: 1px solid var(--rule); position: relative; max-width: 360px; }
+.xl-chart svg { width: 100%; height: auto; display: block; }
+.xl-chart svg text { font-family: var(--calibri); fill: var(--ink-2); }
+.chart-btns { position: absolute; right: -34px; top: 4px; display: grid; gap: 4px; }
+.chart-btns span { width: 26px; height: 26px; border: 1px solid var(--rule); background: var(--paper); border-radius: 3px; display: grid; place-items: center; font: 700 16px/1 var(--sans); color: var(--ink-2); }
+.pane { background: var(--paper); border-left: 1px solid var(--rule); padding: 10px 12px; font-size: 12px; }
+.pane .pt { font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+.pane .sub { font-weight: 700; color: var(--ink-2); margin: 6px 0 4px; font-size: 11.5px; }
+
+/* ---------- Checklist ---------- */
+.checklist { max-width: 1200px; margin-inline: auto; background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 24px; }
+.cl-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px 16px; margin-bottom: 16px; }
+.progress { display: flex; align-items: center; gap: 12px; font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 14px; }
+.bar { width: 160px; height: 8px; border-radius: 999px; background: var(--rule-soft); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--good); border-radius: 999px; transition: width .25s; }
+.cl-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px 28px; }
+.cl-group h3 { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 8px; padding-bottom: 6px; border-bottom: 1px solid var(--rule-soft); }
+.cl-item { display: flex; gap: 10px; align-items: flex-start; padding: 5px 0; cursor: pointer; font-size: 14.5px; }
+.cl-item input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--good); flex: none; cursor: pointer; }
+.cl-item input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--muted) 60%, transparent); }
+footer { max-width: 1200px; margin: 40px auto 0; padding-block: 20px 36px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--rule); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1060px) {
+  .viewer { grid-template-columns: minmax(0, 800px); padding: 16px 12px; }
+  .rail { position: static; }
+  .rail-empty { display: none; }
+  .lead-line { display: none; }
+  .card {
+    position: fixed; left: 12px; right: 12px; top: auto !important; bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    max-width: 560px; margin-inline: auto; max-height: 55vh; overflow: auto; animation-name: sheet-in;
+  }
+  .card::before { display: none; }
+  .step { grid-template-columns: minmax(0, 1fr); }
+}
+@keyframes sheet-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (max-width: 720px) {
+  .intro { grid-template-columns: minmax(0, 1fr); padding-top: 28px; }
+  .viewer { padding: 10px 6px; border-radius: 8px; }
+  .pages { gap: 12px; }
+  .marker { width: 20px; height: 20px; margin: -10px 0 0 3px; font-size: 10px; line-height: 16px; }
+  .step { padding: 18px 16px; }
+  .checklist { padding: 18px 16px; }
+  .chart-btns { right: 4px; top: auto; bottom: 4px; }
+  .ctl-l { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+@media print {
+  body { background: #fff; padding: 0; }
+  .toolbar, .howto, .rail, .actions, .marker, .lead-line, .hl-rect { display: none !important; }
+  .viewer { display: block; border: 0; background: #fff; padding: 0; }
+  .page { box-shadow: none; break-after: page; }
+  .step, .checklist { break-inside: avoid; box-shadow: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="wrap intro">
+  <div>
+    <p class="eyebrow">Fysik C · 1g · Eksempel på god aflevering</p>
+    <h1>Sådan ser en god journal ud: Hookes lov</h1>
+    <p class="lead">Her er en journal om fjederkonstanten, skrevet af en elev i Word med WordMat. Den er ikke perfekt, men den gør det, vi leder efter, når vi retter. Brug den som model, når du skriver din egen.</p>
+  </div>
+  <aside class="howto" aria-labelledby="howto-h">
+    <h2 id="howto-h">Sådan bruger du siden</h2>
+    <ol>
+      <li><b>Læs journalen først</b>, og tænk over, hvad du selv synes er godt.</li>
+      <li><b>Klik på de små markeringer</b> <span class="dot" aria-hidden="true">1</span> i teksten for at læse lærerens kommentar, eller gå dem igennem én ad gangen.</li>
+      <li><b>Lav grafen i Excel</b> med guiden, og tjek din egen journal med tjeklisten.</li>
+    </ol>
+  </aside>
+</header>
+
+<div class="toolbar" id="toolbar">
+  <div class="wrap">
+    <nav class="jump" aria-label="Hop til">
+      <a href="#journal">Journalen</a>
+      <a href="#excel">Graf i Excel</a>
+      <a href="#tjekliste">Tjekliste</a>
+    </nav>
+    <div class="controls">
+      <div class="ctl">
+        <span class="ctl-l" id="mk-l">Markeringer</span>
+        <div class="seg tc" role="group" aria-labelledby="mk-l">
+          <button type="button" data-markers="on" aria-pressed="true">Vis</button>
+          <button type="button" data-markers="off" aria-pressed="false">Skjul</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <span class="ctl-l" id="theme-l">Tema</span>
+        <div class="seg" role="group" aria-labelledby="theme-l">
+          <button type="button" data-theme-set="auto" aria-pressed="true" title="Følg enhedens indstilling">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>Auto</button>
+          <button type="button" data-theme-set="light" aria-pressed="false" title="Lyst tema">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>Lys</button>
+          <button type="button" data-theme-set="dark" aria-pressed="false" title="Mørkt tema">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Mørk</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+<!-- ================= JOURNAL ================= -->
+<section class="part" id="journal" aria-labelledby="journal-h">
+  <div class="part-head">
+    <div>
+      <h2 id="journal-h">Journalen</h2>
+      <p>Sådan blev den afleveret. Klik på en markering for at se lærerens kommentar ved siden af dokumentet.</p>
+    </div>
+    <div class="actions">
+      <a class="btn" id="dl-pdf" hidden><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10m0 0-4-4m4 4 4-4M4 16h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Hent PDF</a>
+      <a class="btn" id="dl-docx" hidden><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10m0 0-4-4m4 4 4-4M4 16h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Hent Word-filen</a>
+      <button class="btn primary" type="button" id="start-tour">Gennemgå kommentarerne</button>
+    </div>
+  </div>
+
+  <div class="viewer" id="viewer">
+    <div class="pages" id="pages"></div>
+    <aside class="rail" id="rail" aria-live="polite">
+      <div class="rail-empty" id="rail-empty"><b>Lærerens kommentarer</b><br>Klik på en nummereret markering i dokumentet, eller tryk ”Gennemgå kommentarerne”.</div>
+      <div class="card" id="card" role="dialog" aria-labelledby="card-count" hidden>
+        <div class="nh"><span class="av" aria-hidden="true">L</span><b>Lærer</b><span class="nn" id="card-count"></span><button class="x" type="button" id="card-close" aria-label="Luk kommentar">×</button></div>
+        <div class="card-b" id="card-body"></div>
+        <div class="card-f">
+          <button class="btn" type="button" id="card-prev">← Forrige</button>
+          <span class="hint">Piletaster virker også</span>
+          <button class="btn primary" type="button" id="card-next">Næste →</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= EXCEL GUIDE ================= -->
+<section class="part" id="excel" aria-labelledby="excel-h">
+  <div class="part-head" >
+    <h2 id="excel-h">Sådan laver du grafen i Excel</h2>
+    <p>Fem trin fra måletal til fjederkonstant. Menunavnene passer til dansk Excel 365. De røde markeringer viser, hvor du skal klikke.</p>
+  </div>
+
+  <div class="steps">
+
+    <!-- Step 1 -->
+    <article class="step">
+      <div class="step-text">
+        <h3><span class="step-no">1</span>Skriv dine data ind i to kolonner</h3>
+        <p>Skriv Δ<i>x</i> i kolonne A og <i>F</i> i kolonne B. Excel bruger altid den <b>venstre</b> kolonne som x-akse, så rækkefølgen betyder noget.</p>
+        <p>Skriv størrelse og enhed i første række, fx <b>Δx (m)</b> og <b>F (N)</b>.</p>
+        <p class="tipbox"><b>Pas på kommaet:</b> I dansk Excel skal du skrive <kbd>0,025</kbd>, ikke <kbd>0.025</kbd>. Med punktum tror Excel, at det er tekst eller en dato, og så kommer punktet ikke med på grafen.</p>
+      </div>
+      <div class="xl-scroll">
+        <div class="xl" aria-label="Illustration: Excel-ark med data i kolonne A og B">
+          <div class="xl-title"><span>Hookes lov.xlsx</span><span>Excel</span></div>
+          <div class="xl-tabs"><span>Filer</span><span class="on">Hjem</span><span>Indsæt</span><span>Sidelayout</span><span>Formler</span><span>Data</span><span>Gennemse</span><span>Vis</span></div>
+          <div class="xl-formula"><span class="nb">A3</span><span class="fx">fx</span><span class="val">0,025</span></div>
+          <div class="xl-body">
+            <div class="xl-grid" data-sheet="plain"></div>
+            <span class="mark" style="left:44px;top:4px">1</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Step 2 -->
+    <article class="step">
+      <div class="step-text">
+        <h3><span class="step-no">2</span>Indsæt et punktdiagram</h3>
+        <ol>
+          <li>Markér dine data <b>inklusive overskrifterne</b> (her A1:B8).</li>
+          <li>Gå til <span class="path">Indsæt<span class="sep">→</span>Diagrammer</span> og klik på ikonet <b>Indsæt punkt- (X, Y) eller boblediagram</b>.</li>
+          <li>Vælg den første: <b>Punkt</b>.</li>
+        </ol>
+        <p class="tipbox"><b>Vælg ikke ”Kurve”.</b> Et kurvediagram placerer punkterne med lige stor afstand, uanset hvad x-værdierne er. Til fysikforsøg skal du næsten altid bruge <b>Punkt (XY)</b>.</p>
+      </div>
+      <div class="xl-scroll">
+        <div class="xl" aria-label="Illustration: fanen Indsæt, gruppen Diagrammer, punktdiagram valgt">
+          <div class="xl-title"><span>Hookes lov.xlsx</span><span>Excel</span></div>
+          <div class="xl-tabs"><span>Filer</span><span>Hjem</span><span class="on ring" style="border-radius:3px">Indsæt</span><span>Sidelayout</span><span>Formler</span><span>Data</span><span>Gennemse</span></div>
+          <div class="xl-ribbon">
+            <div class="xl-group">
+              <div class="icons">
+                <span class="xl-ico"><svg viewBox="0 0 22 22"><rect x="3" y="4" width="16" height="14"/><path d="M3 9h16M9 4v14"/></svg></span>
+              </div>
+              <span class="gname">Tabeller</span>
+            </div>
+            <div class="xl-group">
+              <div class="icons">
+                <span class="xl-ico"><svg viewBox="0 0 22 22"><rect x="3" y="4" width="16" height="14" rx="1"/><circle cx="8" cy="9" r="1.6" class="f"/><path d="M3 16l5-4 4 3 3-2 4 3"/></svg></span>
+              </div>
+              <span class="gname">Illustrationer</span>
+            </div>
+            <div class="xl-group" style="border-right:0">
+              <div class="icons">
+                <span class="xl-ico" title="Søjle"><svg viewBox="0 0 22 22"><rect x="4" y="10" width="3" height="8" class="f"/><rect x="9.5" y="5" width="3" height="13" class="f"/><rect x="15" y="12" width="3" height="6" class="f"/></svg></span>
+                <span class="xl-ico" title="Kurve"><svg viewBox="0 0 22 22"><path d="M3 17l5-6 4 3 7-9"/></svg></span>
+                <span class="xl-ico" title="Cirkel"><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="7"/><path d="M11 4v7h7"/></svg></span>
+                <span class="xl-ico ring" title="Punkt (XY)"><svg viewBox="0 0 22 22"><path d="M3 3v16h16"/><circle cx="7" cy="15" r="1.6" class="f"/><circle cx="10" cy="12" r="1.6" class="f"/><circle cx="13" cy="10" r="1.6" class="f"/><circle cx="17" cy="6" r="1.6" class="f"/></svg></span>
+              </div>
+              <span class="gname">Diagrammer</span>
+            </div>
+          </div>
+          <div class="xl-body">
+            <div class="xl-grid" data-sheet="selected"></div>
+            <div class="xl-pop" style="right:14px;top:8px">
+              <div class="ph">Punkt</div>
+              <div class="thumbs">
+                <span class="thumb ring"><svg viewBox="0 0 30 24"><circle cx="6" cy="18" r="1.8" class="f"/><circle cx="12" cy="14" r="1.8" class="f"/><circle cx="18" cy="10" r="1.8" class="f"/><circle cx="24" cy="6" r="1.8" class="f"/></svg></span>
+                <span class="thumb"><svg viewBox="0 0 30 24"><path d="M4 19c6-2 10-8 22-14"/></svg></span>
+                <span class="thumb"><svg viewBox="0 0 30 24"><path d="M4 19l7-5 6 1 9-10"/></svg></span>
+              </div>
+            </div>
+            <span class="mark" style="left:44px;top:4px">1</span>
+            <span class="mark" style="right:156px;top:34px">3</span>
+          </div>
+          <span class="mark" style="left:330px;top:66px">2</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Step 3 -->
+    <article class="step">
+      <div class="step-text">
+        <h3><span class="step-no">3</span>Tilføj aksetitler med enheder</h3>
+        <ol>
+          <li>Klik på diagrammet, så der kommer tre knapper ved siden af.</li>
+          <li>Klik på <b>+</b> (<b>Diagramelementer</b>) og sæt flueben i <b>Aksetitler</b>.</li>
+          <li>Klik på teksten ”Aksetitel” ved hver akse og skriv fx <b>Forlængelse Δx (m)</b> og <b>Kraft F (N)</b>.</li>
+        </ol>
+        <p>Fjern fluebenet ved <b>Diagramtitel</b>, eller skriv en rigtig titel. Figurteksten i journalen forklarer alligevel grafen.</p>
+      </div>
+      <div class="xl-scroll">
+        <div class="xl" aria-label="Illustration: menuen Diagramelementer med Aksetitler markeret">
+          <div class="xl-chartarea" style="display:flex;gap:44px;align-items:flex-start;flex-wrap:nowrap">
+            <div class="xl-chart" style="flex:1;min-width:210px">
+              <svg viewBox="0 0 300 200" data-mini="axes"></svg>
+              <div class="chart-btns"><span class="ring">+</span><span>✎</span><span>▾</span></div>
+            </div>
+            <div class="xl-pop" style="position:relative;flex:none">
+              <div class="ph">Diagramelementer</div>
+              <div class="chk"><span class="box on"></span>Akser</div>
+              <div class="chk ring" style="border-radius:3px"><span class="box on"></span>Aksetitler</div>
+              <div class="chk"><span class="box"></span>Diagramtitel</div>
+              <div class="chk"><span class="box"></span>Datanavne</div>
+              <div class="chk"><span class="box"></span>Fejlindikatorer</div>
+              <div class="chk"><span class="box on"></span>Gitterlinjer</div>
+              <div class="chk"><span class="box"></span>Forklaring</div>
+              <div class="chk"><span class="box"></span>Tendenslinje</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Step 4 -->
+    <article class="step">
+      <div class="step-text">
+        <h3><span class="step-no">4</span>Tilføj en lineær tendenslinje med ligning</h3>
+        <ol>
+          <li><b>Højreklik</b> på et af punkterne og vælg <b>Tilføj tendenslinje…</b></li>
+          <li>I ruden <b>Formatér tendenslinje</b> vælger du <b>Lineær</b>.</li>
+          <li>Sæt flueben i <b>Vis ligning i diagram</b> og <b>Vis R-kvadreret værdi i diagram</b>.</li>
+        </ol>
+        <p class="tipbox good"><b>Ekstra:</b> Teorien siger, at linjen går gennem (0,0). Hvis du vil tvinge den dertil, kan du sætte flueben i <b>Angiv skæringspunkt</b> og skrive 0. Ellers viser skæringen, hvor tæt dine data er på teorien.</p>
+      </div>
+      <div class="xl-scroll">
+        <div class="xl" aria-label="Illustration: højreklikmenu med Tilføj tendenslinje og ruden Formatér tendenslinje">
+          <div style="display:flex;flex-wrap:nowrap">
+            <div class="xl-chartarea" style="flex:1;min-width:180px;padding:12px">
+              <div class="xl-chart">
+                <svg viewBox="0 0 300 200" data-mini="click"></svg>
+              </div>
+              <div class="xl-pop" style="left:64px;top:54px">
+                <ul class="menu">
+                  <li class="dim">Slet</li>
+                  <li class="dim">Nulstil for at matche typografi</li>
+                  <li class="sepl">Skift seriediagramtype…</li>
+                  <li>Vælg data…</li>
+                  <li class="sepl">Tilføj datanavne</li>
+                  <li class="hi ring">Tilføj tendenslinje…</li>
+                  <li>Formatér dataserie…</li>
+                </ul>
+              </div>
+              <span class="mark" style="left:54px;top:208px">1</span>
+            </div>
+            <div class="pane" style="width:216px;flex:none">
+              <div class="pt">Formatér tendenslinje</div>
+              <div class="sub">Tendenslinjeindstillinger</div>
+              <div class="chk"><span class="radio"></span>Eksponentiel</div>
+              <div class="chk ring" style="border-radius:3px"><span class="radio on"></span>Lineær</div>
+              <div class="chk"><span class="radio"></span>Logaritmisk</div>
+              <div class="chk"><span class="radio"></span>Polynomisk</div>
+              <div class="chk"><span class="radio"></span>Potens</div>
+              <div class="chk" style="margin-bottom:6px"><span class="radio"></span>Glidende gennemsnit</div>
+              <div class="chk"><span class="box"></span>Angiv skæringspunkt</div>
+              <div class="chk ring" style="border-radius:3px;margin-top:3px"><span class="box on"></span>Vis ligning i diagram</div>
+              <div class="chk ring" style="border-radius:3px;margin-top:5px"><span class="box on"></span>Vis R-kvadreret værdi i diagram</div>
+            </div>
+          </div>
+          <span class="mark" style="right:196px;top:86px">2</span>
+          <span class="mark" style="right:196px;top:243px">3</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Step 5 -->
+    <article class="step">
+      <div class="step-text">
+        <h3><span class="step-no">5</span>Aflæs k og skriv det med enhed</h3>
+        <p>Excel skriver ligningen som <b>y = 19,95x + 0,0024</b>. Excel kender ikke dine enheder, så du skal selv oversætte den til fysik:</p>
+        <p class="calc" style="font-family:var(--doc)"><i>F</i> = 19,95 N/m · Δ<i>x</i> + 0,0024 N</p>
+        <ul>
+          <li><b>Hældningen</b> (tallet foran x) er fjederkonstanten: <i>k</i> = 19,95 N/m. Enheden er y-aksens enhed divideret med x-aksens: N/m.</li>
+          <li><b>R² = 0,9998</b> er tæt på 1, så punkterne ligger meget tæt på en ret linje.</li>
+          <li>Kopiér grafen ind i din journal og skriv en <b>figurtekst</b> under.</li>
+        </ul>
+      </div>
+      <div class="xl-scroll">
+        <div class="xl" aria-label="Illustration: færdig graf med aksetitler, tendenslinje og ligning">
+          <div class="xl-chartarea">
+            <div class="xl-chart" style="max-width:none">
+              <svg viewBox="0 0 300 200" data-mini="final"></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ================= CHECKLIST ================= -->
+<section class="part" id="tjekliste" aria-labelledby="cl-h">
+  <div class="part-head" >
+    <h2 id="cl-h">Tjekliste til din egen journal</h2>
+    <p>Gå din journal igennem, før du afleverer. Dine flueben bliver gemt i denne browser.</p>
+  </div>
+  <div class="checklist">
+    <div class="cl-head">
+      <div class="progress"><div class="bar"><i id="cl-bar"></i></div><span id="cl-count">0 af 0 tjekket</span></div>
+      <button class="btn" type="button" id="cl-reset">Nulstil tjekliste</button>
+    </div>
+    <div class="cl-groups" id="cl-groups"></div>
+  </div>
+</section>
+</main>
+
+<footer>Journalen er et konstrueret eksempel til undervisningsbrug. Navne og måledata er opdigtede, men realistiske.</footer>
+
+<script id="journal-data" type="application/json">__JOURNAL_DATA__</script>
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function store(key, val) {
+    try {
+      if (val === undefined) return JSON.parse(localStorage.getItem(key));
+      localStorage.setItem(key, JSON.stringify(val));
+    } catch (e) { return null; }
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  /* ================= Journal (PDF-sider + kommentarer) ================= */
+  var J = JSON.parse(document.getElementById("journal-data").textContent);
+  var pagesEl = document.getElementById("pages"), viewer = document.getElementById("viewer");
+  var layers = J.pages.map(function (p, i) {
+    var wrap = document.createElement("div");
+    wrap.className = "page";
+    wrap.innerHTML = '<img alt="Journalen, side ' + (i + 1) + ' af ' + J.pages.length + '" src="' + p.src + '" width="' + Math.round(p.w * 2) + '" height="' + Math.round(p.h * 2) + '"' + (i > 1 ? ' loading="lazy"' : '') + '><div class="layer"></div>';
+    pagesEl.appendChild(wrap);
+    return wrap.querySelector(".layer");
+  });
+
+  var C = J.comments, N = C.length, cur = -1;
+  C.forEach(function (c, i) {
+    c.rectEls = c.rects.map(function (r) {
+      var d = document.createElement("div");
+      d.className = "hl-rect";
+      d.style.cssText = "left:" + r.b[0] + "%;top:" + r.b[1] + "%;width:" + r.b[2] + "%;height:" + r.b[3] + "%";
+      layers[r.p].appendChild(d);
+      return d;
+    });
+    var m = document.createElement("button");
+    m.type = "button"; m.className = "marker"; m.textContent = i + 1;
+    m.setAttribute("aria-label", "Lærerkommentar " + (i + 1));
+    m.style.left = c.marker.x + "%"; m.style.top = c.marker.y + "%";
+    m.addEventListener("click", function () { cur === i ? close() : open(i, false); });
+    m.addEventListener("mouseenter", function () { if (cur !== i) c.rectEls.forEach(function (d) { d.classList.add("on"); }); });
+    m.addEventListener("mouseleave", function () { if (cur !== i) c.rectEls.forEach(function (d) { d.classList.remove("on"); }); });
+    layers[c.marker.p].appendChild(m);
+    c.markerEl = m;
+    var line = document.createElement("div");
+    line.className = "lead-line"; line.hidden = true;
+    line.style.left = c.marker.x + "%"; line.style.top = c.marker.y + "%";
+    line.style.width = "calc(" + (100 - c.marker.x) + "% + 28px)";
+    layers[c.marker.p].appendChild(line);
+    c.lineEl = line;
+  });
+
+  // downloads
+  function dl(id, file, mime) {
+    if (!file || !file.data) return;
+    var a = document.getElementById(id);
+    a.href = "data:" + mime + ";base64," + file.data; a.download = file.name; a.hidden = false;
+  }
+  dl("dl-pdf", J.pdf, "application/pdf");
+  dl("dl-docx", J.docx, "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+
+  var card = document.getElementById("card"), cardBody = document.getElementById("card-body");
+  var cardCount = document.getElementById("card-count"), railEmpty = document.getElementById("rail-empty");
+  var btnPrev = document.getElementById("card-prev"), btnNext = document.getElementById("card-next");
+  var toolbar = document.getElementById("toolbar");
+  var narrow = window.matchMedia("(max-width: 1060px)");
+
+  function pitfallHTML(t) {
+    return '<div class="pitfall"><h4>Typisk fejl: ' + esc(t.emne) + '</h4>' +
+      '<div class="pf weak"><span class="tag">✗ Svag</span>' + esc(t.svag) + '</div>' +
+      '<div class="pf strong"><span class="tag">✓ Stærk</span>' + esc(t.staerk) + '</div></div>';
+  }
+  function clearActive() {
+    C.forEach(function (c) {
+      c.markerEl.classList.remove("on");
+      c.rectEls.forEach(function (d) { d.classList.remove("on"); });
+      c.lineEl.hidden = true;
+    });
+  }
+  function open(i, scroll) {
+    setMarkers(true);
+    cur = Math.max(0, Math.min(N - 1, i));
+    var c = C[cur];
+    clearActive();
+    c.markerEl.classList.add("on");
+    c.rectEls.forEach(function (d) { d.classList.add("on"); });
+    c.lineEl.hidden = false;
+    cardCount.textContent = "Kommentar " + (cur + 1) + " af " + N;
+    cardBody.innerHTML = "<p>" + c.tekst + "</p>" + (c.typiskFejl ? pitfallHTML(c.typiskFejl) : "");
+    btnPrev.disabled = cur === 0;
+    btnNext.textContent = cur === N - 1 ? "Færdig ✓" : "Næste →";
+    card.hidden = false; railEmpty.hidden = true;
+    place();
+    if (scroll) scrollToCurrent();
+    btnNext.focus({ preventScroll: true });
+  }
+  function close() {
+    cur = -1; clearActive(); card.hidden = true; railEmpty.hidden = false;
+  }
+  function place() {
+    if (cur < 0 || narrow.matches) return;
+    var m = C[cur].markerEl.getBoundingClientRect(), v = document.getElementById("rail").getBoundingClientRect();
+    var my = m.top + m.height / 2 - v.top;
+    var h = card.offsetHeight, maxTop = Math.max(0, v.height - h);
+    var top = Math.max(0, Math.min(maxTop, my - 30));
+    card.style.top = top + "px";
+    card.style.setProperty("--ay", Math.max(16, Math.min(h - 16, my - top)) + "px");
+  }
+  function scrollToCurrent() {
+    var m = C[cur].markerEl.getBoundingClientRect();
+    var rects = C[cur].rectEls.map(function (d) { return d.getBoundingClientRect(); });
+    var top = Math.min.apply(null, rects.map(function (r) { return r.top; }).concat(m.top));
+    var tb = toolbar.offsetHeight;
+    var room = narrow.matches ? window.innerHeight * 0.4 : window.innerHeight * 0.3;
+    var target = window.scrollY + top - tb - Math.max(24, Math.min(room, 120));
+    if (!narrow.matches) {
+      var cr = card.getBoundingClientRect();
+      var bottom = Math.max(cr.bottom, m.bottom);
+      if (bottom - (top - tb - 24) > window.innerHeight) target = window.scrollY + top - tb - 16;
+    }
+    window.scrollTo({ top: target, behavior: reduceMotion ? "auto" : "smooth" });
+  }
+  btnPrev.addEventListener("click", function () { open(cur - 1, true); });
+  btnNext.addEventListener("click", function () { if (cur === N - 1) close(); else open(cur + 1, true); });
+  document.getElementById("card-close").addEventListener("click", close);
+  document.getElementById("start-tour").addEventListener("click", function () { open(0, true); });
+  document.addEventListener("keydown", function (e) {
+    if (cur < 0 || e.altKey || e.ctrlKey || e.metaKey) return;
+    if (e.target.closest && e.target.closest("input, textarea")) return;
+    if (e.key === "ArrowRight") { e.preventDefault(); if (cur < N - 1) open(cur + 1, true); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); if (cur > 0) open(cur - 1, true); }
+    else if (e.key === "Escape") close();
+  });
+  window.addEventListener("resize", place);
+  window.addEventListener("load", place);
+
+  // Markeringer vis/skjul
+  var mkBtns = document.querySelectorAll("[data-markers]");
+  function setMarkers(on) {
+    viewer.classList.toggle("no-markers", !on);
+    mkBtns.forEach(function (b) { b.setAttribute("aria-pressed", (b.getAttribute("data-markers") === "on") === on); });
+    if (!on && cur >= 0) close();
+    store("hooke-markers", on);
+  }
+  mkBtns.forEach(function (b) { b.addEventListener("click", function () { setMarkers(b.getAttribute("data-markers") === "on"); }); });
+  setMarkers(store("hooke-markers") !== false);
+
+  /* ================= Tema ================= */
+  var themeBtns = document.querySelectorAll("[data-theme-set]");
+  function setTheme(t) {
+    if (t === "auto") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", t);
+    themeBtns.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-theme-set") === t); });
+    try { localStorage.setItem("hooke-theme", t); } catch (e) {}
+  }
+  themeBtns.forEach(function (b) { b.addEventListener("click", function () { setTheme(b.getAttribute("data-theme-set")); }); });
+  setTheme(root.getAttribute("data-theme") || "auto");
+
+  /* ================= Excel-guiden (samme måledata som journalen) ================= */
+  var g = 9.82, L0 = 12.3;
+  var masses = [0, 50, 100, 150, 200, 250, 300], positions = [12.3, 14.8, 17.1, 19.7, 22.2, 24.5, 27.1];
+  var pts = masses.map(function (m, i) { return { m: m, dx: Math.round((positions[i] - L0) * 10) / 1000, F: m / 1000 * g }; });
+  var fmt = function (v, d) { return v.toFixed(d).replace(".", ","); };
+  var FIT = (function () {
+    var n = pts.length, sx = 0, sy = 0, sxx = 0, sxy = 0;
+    pts.forEach(function (p) { sx += p.dx; sy += p.F; sxx += p.dx * p.dx; sxy += p.dx * p.F; });
+    var a = (n * sxy - sx * sy) / (n * sxx - sx * sx), b = (sy - a * sx) / n, mean = sy / n, sst = 0, s1 = 0;
+    pts.forEach(function (p) { sst += Math.pow(p.F - mean, 2); s1 += Math.pow(p.F - (a * p.dx + b), 2); });
+    return { a: a, b: b, r2: 1 - s1 / sst };
+  })();
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  var cols = ["", "A", "B", "C", "D"];
+  document.querySelectorAll(".xl-grid").forEach(function (gEl) {
+    var selected = gEl.getAttribute("data-sheet") === "selected";
+    var html = cols.map(function (c, ci) { return "<div class=\"h" + (selected && (ci === 1 || ci === 2) ? " selh" : "") + "\">" + c + "</div>"; }).join("");
+    var rows = [["Δx (m)", "F (N)"]].concat(pts.map(function (p) { return [fmt(p.dx, 3), fmt(p.F, 3)]; }));
+    rows.forEach(function (r, ri) {
+      html += "<div class=\"h" + (selected ? " selh" : "") + "\">" + (ri + 1) + "</div>";
+      for (var ci = 0; ci < 4; ci++) {
+        var v = ci < 2 ? r[ci] : "", cls = [];
+        if (ri === 0 && ci < 2) cls.push("b"); else if (ci < 2) cls.push("n");
+        if (selected && ci < 2) cls.push("sel");
+        if (!selected && ri === 2 && ci === 0) cls.push("cur");
+        html += "<div class=\"" + cls.join(" ") + "\">" + v + "</div>";
+      }
+    });
+    gEl.innerHTML = html;
+  });
+  document.querySelectorAll("svg[data-mini]").forEach(function (s) {
+    var kind = s.getAttribute("data-mini");
+    var w = 300, h = 200, m = { l: 44, r: 12, t: 16, b: 38 };
+    var x = function (v) { return m.l + v / 0.16 * (w - m.l - m.r); };
+    var y = function (v) { return h - m.b - v / 3.5 * (h - m.t - m.b); };
+    for (var a = 0; a <= 3.5; a += 0.5) {
+      el("line", { x1: x(0), x2: x(0.16), y1: y(a), y2: y(a), stroke: "var(--rule-soft)", "stroke-width": 1 }, s);
+      el("text", { x: x(0) - 5, y: y(a) + 3, "text-anchor": "end", "font-size": 9 }, s).textContent = fmt(a, 1);
+    }
+    for (var b = 0; b <= 0.16001; b += 0.04) {
+      el("text", { x: x(b), y: y(0) + 12, "text-anchor": "middle", "font-size": 9 }, s).textContent = fmt(b, 2);
+    }
+    el("line", { x1: x(0), x2: x(0.16), y1: y(0), y2: y(0), stroke: "var(--muted)", "stroke-width": 1 }, s);
+    if (kind === "final") {
+      el("line", { x1: x(0), y1: y(FIT.b), x2: x(0.16), y2: y(FIT.a * 0.16 + FIT.b), stroke: "var(--ink-2)", "stroke-width": 1.2, "stroke-dasharray": "4 3" }, s);
+      el("text", { x: x(0.105), y: y(1.1), "font-size": 10.5, fill: "var(--ink)" }, s).textContent = "y = " + fmt(FIT.a, 2) + "x + " + fmt(FIT.b, 4);
+      el("text", { x: x(0.105), y: y(1.1) + 13, "font-size": 10.5, fill: "var(--ink)" }, s).textContent = "R² = " + fmt(FIT.r2, 4);
+    }
+    pts.forEach(function (p, k) {
+      var hit = kind === "click" && k === 3;
+      el("circle", { cx: x(p.dx), cy: y(p.F), r: hit ? 4.5 : 3.5, fill: "#4472C4", stroke: hit ? "var(--teacher)" : "none", "stroke-width": 2 }, s);
+    });
+    var at = el("text", { x: (x(0) + x(0.16)) / 2, y: h - 8, "text-anchor": "middle", "font-size": 10.5, "font-weight": 600 }, s);
+    var bt = el("text", { transform: "translate(12 " + y(1.75) + ") rotate(-90)", "text-anchor": "middle", "font-size": 10.5, "font-weight": 600 }, s);
+    at.textContent = kind === "axes" ? "Aksetitel" : "Forlængelse Δx (m)";
+    bt.textContent = kind === "axes" ? "Aksetitel" : "Kraft F (N)";
+    if (kind === "axes") { at.setAttribute("fill", "var(--teacher)"); bt.setAttribute("fill", "var(--teacher)"); }
+  });
+
+  /* ================= Tjekliste ================= */
+  var groups = [
+    ["Forside og formål", [
+      "Forside med titel, navn, klasse, makker og datoer",
+      "Formålet siger, hvad der undersøges, og hvad der skal bestemmes"]],
+    ["Teori", [
+      "Ligninger lavet i WordMat og nummererede",
+      "Alle symboler er forklaret med enheder",
+      "Antagelser er nævnt"]],
+    ["Materialer og fremgangsmåde", [
+      "Materialelisten er konkret (fx måleområde eller inddeling)",
+      "Skitse af opstillingen med figurnummer og figurtekst",
+      "Nummererede trin, så en anden kan gentage forsøget"]],
+    ["Data og databehandling", [
+      "Tabel med nummer, tekst og enheder i kolonneoverskriften",
+      "Både målte og beregnede værdier står i tabellen",
+      "Én eksempelberegning med tal og enheder",
+      "Punktdiagram (XY) med aksetitler og enheder",
+      "Tendenslinje med ligning, og hældningen er forklaret"]],
+    ["Diskussion og konklusion", [
+      "Konkrete fejlkilder, og hvordan de påvirker resultatet",
+      "Resultatet er sammenlignet med teori eller en kendt værdi",
+      "Konklusionen svarer direkte på formålet",
+      "Resultatet er skrevet med tal, enhed og usikkerhed"]]
+  ];
+  var saved = store("hooke-check2") || {};
+  var box = document.getElementById("cl-groups"), total = 0;
+  box.innerHTML = groups.map(function (grp, gi) {
+    return "<div class=\"cl-group\"><h3>" + grp[0] + "</h3>" + grp[1].map(function (txt, ii) {
+      total++;
+      var id = "cl-" + gi + "-" + ii;
+      return "<label class=\"cl-item\" for=\"" + id + "\"><input type=\"checkbox\" id=\"" + id + "\"" + (saved[id] ? " checked" : "") + "><span>" + txt + "</span></label>";
+    }).join("") + "</div>";
+  }).join("");
+  function updateCount() {
+    var n = 0, state = {};
+    box.querySelectorAll("input").forEach(function (b) { if (b.checked) { n++; state[b.id] = true; } });
+    document.getElementById("cl-count").textContent = n + " af " + total + " tjekket";
+    document.getElementById("cl-bar").style.width = (n / total * 100) + "%";
+    return state;
+  }
+  box.addEventListener("change", function () { store("hooke-check2", updateCount()); });
+  document.getElementById("cl-reset").addEventListener("click", function () {
+    box.querySelectorAll("input").forEach(function (b) { b.checked = false; });
+    store("hooke-check2", updateCount());
+  });
+  updateCount();
+})();
+</script>
+</body>
+</html>
