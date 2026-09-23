@@ -2,6 +2,16 @@
   "pdf": "journal/Hookes lov - journal.pdf",
   "docx": "journal/Hookes lov - journal.docx",
   "ud": "fysik/hookes-lov-journal.html",
+  "sektion": "journal",
+  "seOgsaa": [
+    { "type": "Guide", "titel": "Graf i Excel", "tekst": "Punktdiagram, tendenslinje og aflæsning af hældningen med enhed.", "href": "../vaerktoejer/graf-i-excel.html" },
+    { "type": "Fysik", "titel": "Alle journaler", "tekst": "Se, hvordan journalerne udvikler sig fra 1g til 3g.", "href": "./#journal" },
+    { "type": "Værktøjer", "titel": "Flere guides", "tekst": "Tabeller, figurtekster og ligninger i Word og WordMat.", "href": "../vaerktoejer/" }
+  ],
+  "varianter": [
+    { "navn": "Word + WordMat", "href": "hookes-lov-journal.html" },
+    { "navn": "LaTeX" }
+  ],
   "kommentarer": [
     {
       "start": "Navn", "slut": "17. september 2026", "boks": true,
@@ -44,11 +54,13 @@
     {
       "billede": 2,
       "tekst": "Punktdiagram med aksetitler og enheder, kun punkter (ingen streger mellem dem), en lineær tendenslinje og ligningen vist. Figurteksten forklarer, hvad man ser.",
-      "typiskFejl": { "emne": "grafen", "svag": "Titlen hedder ”Diagramtitel”, akserne har ingen titler, og punkterne er forbundet med en kurve.", "staerk": "Punktdiagram (XY), aksetitler med enhed, en lineær tendenslinje og ligningen vist." }
+      "typiskFejl": { "emne": "grafen", "svag": "Titlen hedder ”Diagramtitel”, akserne har ingen titler, og punkterne er forbundet med en kurve.", "staerk": "Punktdiagram (XY), aksetitler med enhed, en lineær tendenslinje og ligningen vist." },
+      "guide": { "titel": "Graf i Excel", "href": "../vaerktoejer/graf-i-excel.html" }
     },
     {
       "start": "Punkterne ligger på en ret linje tæt på", "slut": "måleusikkerheden.",
-      "tekst": "Her er kernen: du forbinder grafen med teorien. Hældningen <em>er</em> k, og du kommenterer, at linjen går gennem (0,0). Mange glemmer at sige, hvad hældningen betyder."
+      "tekst": "Her er kernen: du forbinder grafen med teorien. Hældningen <em>er</em> k, og du kommenterer, at linjen går gennem (0,0). Mange glemmer at sige, hvad hældningen betyder.",
+      "guide": { "titel": "Aflæs hældningen i Excel", "href": "../vaerktoejer/graf-i-excel.html#trin-5" }
     },
     {
       "start": "Den største fejlkilde", "slut": "over linjen.",

@@ -98,6 +98,8 @@ for n, c in enumerate(cfg["kommentarer"], 1):
     }
     if c.get("typiskFejl"):
         item["typiskFejl"] = c["typiskFejl"]
+    if c.get("guide"):
+        item["guide"] = c["guide"]
     out.append(item)
 
 if errors:
@@ -110,6 +112,10 @@ data = {
     "pages": pages, "comments": out,
     "pdf": {"name": os.path.basename(pdf_path), "data": b64(pdf_path)},
     "docx": {"name": os.path.basename(rel(cfg["docx"])), "data": b64(rel(cfg["docx"]))} if cfg.get("docx") else None,
+    # "sektion": fanen på fagsiden, som brødkrummen går tilbage til. "seOgsaa": links nederst på siden.
+    "sektion": cfg.get("sektion"), "seOgsaa": cfg.get("seOgsaa", []),
+    # Versioner af dokumentet (fx Word / LaTeX). Uden "href" vises versionen som "kommer snart".
+    "varianter": [dict(v, aktiv=v.get("href") == os.path.basename(cfg.get("ud", ""))) for v in cfg.get("varianter", [])],
 }
 tpl = open(os.path.join(ROOT, "build", "showroom-template.html"), encoding="utf-8").read()
 html = tpl.replace("__JOURNAL_DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/"))

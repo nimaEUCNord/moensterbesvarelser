@@ -13,7 +13,15 @@ Den kan også lægges på hjemmesiden https://mosskov.github.io/moensterbesvarel
    - `"boks": true` markerer det hele som én kasse (godt til lister, tabeller og ligninger)
    - `"billede": 0` peger på et billede i stedet (billederne tælles fra forsiden, startende med 0)
    - `"typiskFejl"` (valgfri) viser en svag og en stærk formulering under kommentaren
+   - `"guide"` (valgfri) viser et link til en guide under kommentaren, fx
+     `{"titel": "Graf i Excel", "href": "../vaerktoejer/graf-i-excel.html#trin-5"}`
    - Mellemrum og kursiv matematik er ligegyldige for søgningen.
+   Findes dokumentet i flere versioner (fx Word og LaTeX), bygges hver version som sin egen side med sin
+   egen kommentarfil. Alle kommentarfilerne får den samme liste, som giver en vælger øverst på siden:
+   `"varianter": [{"navn": "Word + WordMat", "href": "hookes-lov-journal.html"}, {"navn": "LaTeX"}]`
+   En version uden `"href"` vises som "kommer snart". Opgaveregning skal have versionerne WordMat, Maple og I hånden.
+   `"sektion"` (fx `"journal"`) er fanen på fagsiden, som brødkrummen "Fysik" går tilbage til, og `"seOgsaa"` er
+   en liste af links (`type`, `titel`, `tekst`, `href`), der vises nederst på siden.
 3. Kør: `python build/build_html.py build/min-kommentarfil.json`
    Kan et citat ikke findes, skriver scriptet hvilket.
 
@@ -40,6 +48,9 @@ Første gang (ikke gjort endnu):
 Hjemmesiden er repoet `Mosskov/moensterbesvarelser`. Forsiden `index.html` viser kun fagene.
 Hvert fag har sin egen mappe med en fagside (fx `fysik/index.html`), der viser fagets dokumenter.
 Fælles stil og temaknapper ligger i `assets/site.css` og `assets/site.js`.
+Guiderne (Word, Excel, WordMat) ligger i `vaerktoejer/` og er almindelige, håndskrevne HTML-sider, der ikke bygges.
+De bruger `assets/guide.css` (trin og tegnede Excel-skærme). En ny guide erstatter et "Kommer snart"-kort på
+`vaerktoejer/index.html`, og journalerne linker til den med `"guide"` i kommentarfilen.
 GitHub bygger siden igen, hver gang der bliver pushet til `main`.
 
 1. Ret skabelonen eller kommentarfilen, og kør `python build/build_html.py ...`

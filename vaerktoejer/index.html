@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Værktøjer – Mønsterbesvarelser</title>
+<meta name="description" content="Guides til Word, Excel og WordMat: tabeller, grafer, ligninger og mere.">
+<script>
+  try { var t = localStorage.getItem("hooke-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <nav class="crumbs" aria-label="Brødkrummer"><a href="../">Mønsterbesvarelser</a></nav>
+      <h1>Værktøjer</h1>
+      <p class="lede">Trin-for-trin-guides til de ting, du skal bruge i alle afleveringer: grafer, tabeller, ligninger og opsætning i Word. Vælg et program.</p>
+    </div>
+    <div class="seg" role="group" aria-label="Tema">
+      <button type="button" data-theme-set="auto" aria-pressed="true" title="Følg enhedens indstilling">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>Auto</button>
+      <button type="button" data-theme-set="light" aria-pressed="false" title="Lyst tema">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>Lys</button>
+      <button type="button" data-theme-set="dark" aria-pressed="false" title="Mørkt tema">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Mørk</button>
+    </div>
+  </header>
+
+  <nav class="types" aria-label="Programmer" data-noun="guide|guider">
+    <a href="#excel"><b>Excel</b><span></span></a>
+    <a href="#word"><b>Word</b><span></span></a>
+    <a href="#wordmat"><b>WordMat</b><span></span></a>
+  </nav>
+
+  <main>
+    <!-- Ny guide: læg siden i denne mappe, og erstat det relevante <div class="card soon">-kort med et <a class="card">. -->
+
+    <section class="doctype" id="excel">
+      <h2>Excel</h2>
+      <p class="intro">Databehandling og grafer i dansk Excel 365.</p>
+      <div class="grid">
+        <a class="card" href="graf-i-excel.html">
+          <h3>Graf i Excel</h3>
+          <p>Punktdiagram med aksetitler, lineær tendenslinje og ligning, og sådan aflæser du hældningen med enhed.</p>
+          <span class="go">Åbn guiden →</span>
+        </a>
+        <div class="card soon"><h3>Beregninger med formler</h3><p>Lad Excel regne en hel kolonne ud, fx F = m · g, med rigtige enheder i overskriften.</p><span class="go">Kommer snart</span></div>
+      </div>
+    </section>
+
+    <section class="doctype" id="word">
+      <h2>Word</h2>
+      <p class="intro">Opsætning, der får en aflevering til at se ordentlig ud og være nem at læse.</p>
+      <div class="grid">
+        <div class="card soon"><h3>Tabel med tabeltekst</h3><p>Tabel med nummer og tekst over, enheder i kolonneoverskriften og målte og beregnede værdier hver for sig.</p><span class="go">Kommer snart</span></div>
+        <div class="card soon"><h3>Figurer og figurtekst</h3><p>Indsæt billeder og grafer med nummereret figurtekst, som du kan henvise til.</p><span class="go">Kommer snart</span></div>
+        <div class="card soon"><h3>Indholdsfortegnelse</h3><p>Brug overskrifttypografier, så Word selv laver og opdaterer indholdsfortegnelsen.</p><span class="go">Kommer snart</span></div>
+      </div>
+    </section>
+
+    <section class="doctype" id="wordmat">
+      <h2>WordMat</h2>
+      <p class="intro">Ligninger og beregninger, der kan læses og følges.</p>
+      <div class="grid">
+        <div class="card soon"><h3>Ligninger og nummerering</h3><p>Skriv formler i WordMat, og nummerér dem, så du kan henvise til (1) og (2).</p><span class="go">Kommer snart</span></div>
+        <div class="card soon"><h3>Eksempelberegning med enheder</h3><p>Vis én beregning med tal og enheder hele vejen igennem.</p><span class="go">Kommer snart</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>
