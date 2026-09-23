@@ -3,19 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mønsterbesvarelser</title>
-<meta name="description" content="Eksempler på gode afleveringer med lærerkommentarer.">
+<title>Fysik – Mønsterbesvarelser</title>
+<meta name="description" content="Mønsterbesvarelser i fysik med lærerkommentarer.">
 <script>
   try { var t = localStorage.getItem("hooke-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
 </script>
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
 <div class="wrap">
   <header>
     <div>
-      <h1>Mønsterbesvarelser</h1>
-      <p class="lede">Eksempler på gode afleveringer med lærerens kommentarer. Vælg et fag.</p>
+      <a class="back" href="../">← Alle fag</a>
+      <h1>Fysik</h1>
+      <p class="lede">Klik på et dokument og se, hvad der gør det godt.</p>
     </div>
     <div class="seg" role="group" aria-label="Tema">
       <button type="button" data-theme-set="auto" aria-pressed="true" title="Følg enhedens indstilling">
@@ -28,28 +29,19 @@
   </header>
 
   <main>
-    <!-- Et kort pr. fag. Et fag uden dokumenter er et <div class="card soon">; når det får en fagside, bliver det et <a class="card" href="fag/">. -->
-    <div class="grid subjects">
-      <a class="card" href="fysik/">
-        <h2>Fysik</h2>
-        <p>1 dokument</p>
-        <span class="go">Se eksempler →</span>
+    <!-- Nyt dokument: kopiér et <a class="card">-kort, og husk at rette antallet på forsiden. -->
+    <div class="grid">
+      <a class="card" href="hookes-lov-journal.html">
+        <span class="type">Journal</span>
+        <h3>Hookes lov</h3>
+        <p>Fysik C. Bestemmelse af fjederkonstanten for en skruefjeder med lodder og lineal, med graf i Excel og fejlkilder.</p>
+        <span class="go">Åbn journalen →</span>
       </a>
-      <div class="card soon">
-        <h2>Matematik</h2>
-        <p>Kommer snart</p>
-      </div>
-      <div class="card soon">
-        <h2>Kemi</h2>
-        <p>Kommer snart</p>
-      </div>
-      <div class="card soon">
-        <h2>Biologi</h2>
-        <p>Kommer snart</p>
-      </div>
     </div>
   </main>
+
+  <footer>Dokumenterne kan også hentes som PDF og Word inde på hver side.</footer>
 </div>
-<script src="assets/site.js"></script>
+<script src="../assets/site.js"></script>
 </body>
 </html>

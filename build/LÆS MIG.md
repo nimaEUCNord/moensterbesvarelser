@@ -1,6 +1,6 @@
 # Sådan fodres en journal ind i Mønsterbesvarelser
 
-Siden `hookes-lov-journal.html` bygges ud fra en PDF og en liste med lærerkommentarer.
+Siden `fysik/hookes-lov-journal.html` bygges ud fra en PDF og en liste med lærerkommentarer.
 Resultatet er én selvstændig HTML-fil, der virker offline og kan lægges på Lectio/Teams.
 Den kan også lægges på hjemmesiden https://mosskov.github.io/moensterbesvarelser/ (se Publicering nederst).
 
@@ -37,9 +37,13 @@ Første gang (ikke gjort endnu):
 `gh repo create Mosskov/moensterbesvarelser --public --source . --push` og derefter
 `gh api -X POST repos/Mosskov/moensterbesvarelser/pages -f "source[branch]=main" -f "source[path]=/"`
 
-Hjemmesiden er repoet `Mosskov/moensterbesvarelser`. Forsiden er `index.html` i roden.
+Hjemmesiden er repoet `Mosskov/moensterbesvarelser`. Forsiden `index.html` viser kun fagene.
+Hvert fag har sin egen mappe med en fagside (fx `fysik/index.html`), der viser fagets dokumenter.
+Fælles stil og temaknapper ligger i `assets/site.css` og `assets/site.js`.
 GitHub bygger siden igen, hver gang der bliver pushet til `main`.
 
 1. Ret skabelonen eller kommentarfilen, og kør `python build/build_html.py ...`
-2. Er det et nyt dokument, så tilføj et kort i `index.html` (kopiér et `<a class="doc">`, eller en hel `<section>` til et nyt fag)
+2. Er det et nyt dokument, så sæt `"ud"` til fagets mappe (fx `"kemi/titel.html"`), tilføj et kort på fagsiden,
+   og ret antallet på forsiden. Første dokument i et nyt fag: kopiér `fysik/index.html` til fagets mappe, og gør
+   fagets "Kommer snart"-kort på forsiden til et link (`<a class="card" href="kemi/">`).
 3. `git add -A`, `git commit -m "..."` og `git push`. Siden er opdateret efter et minut eller to.

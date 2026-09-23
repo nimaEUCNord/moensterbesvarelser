@@ -1,0 +1,79 @@
+/* Fælles stil for forsiden og fagsiderne. Samme farver og tema som journalsiderne (build/showroom-template.html) */
+:root {
+  color-scheme: light;
+  --ground: #E8ECF1; --paper: #FFFFFF; --ink: #18202B; --ink-2: #465262; --muted: #6A7584;
+  --rule: #D3DAE2; --pen: #1F4FA3; --pen-soft: #E3EBF9; --teacher: #B8234A; --teacher-bg: #FFF4F6;
+  --focus: #1F4FA3;
+  --shadow: 0 1px 2px rgba(24,32,43,.06), 0 8px 24px rgba(24,32,43,.07);
+  --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
+  --doc: Cambria, "Iowan Old Style", Georgia, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #11151B; --paper: #1A2029; --ink: #E7EBF1; --ink-2: #B4BDC9; --muted: #8D97A4;
+    --rule: #2F3845; --pen: #86ABF2; --pen-soft: #1F2C45; --teacher: #FF8DA7; --teacher-bg: #2A1C23;
+    --focus: #86ABF2;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #11151B; --paper: #1A2029; --ink: #E7EBF1; --ink-2: #B4BDC9; --muted: #8D97A4;
+  --rule: #2F3845; --pen: #86ABF2; --pen-soft: #1F2C45; --teacher: #FF8DA7; --teacher-bg: #2A1C23;
+  --focus: #86ABF2;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font: 15px/1.55 var(--sans);
+  padding-inline: 16px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+a { color: var(--pen); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+h1, h2 { text-wrap: balance; }
+.wrap { max-width: 900px; margin-inline: auto; }
+
+header { padding: 36px 0 8px; display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: flex-end; justify-content: space-between; }
+h1 { font: 700 34px/1.15 var(--doc); margin: 0 0 6px; letter-spacing: -.01em; }
+.lede { margin: 0; color: var(--ink-2); max-width: 56ch; }
+.back { display: inline-block; margin-bottom: 10px; font-size: 14px; font-weight: 600; text-decoration: none; }
+.back:hover { text-decoration: underline; }
+
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 7px; overflow: hidden; background: var(--paper); }
+.seg button { font: 500 13px var(--sans); border: 0; background: transparent; color: var(--ink-2); padding: 6px 11px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.seg button + button { border-left: 1px solid var(--rule); }
+.seg button:hover { color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--pen-soft); color: var(--pen); font-weight: 600; }
+.seg svg { width: 15px; height: 15px; flex: none; }
+
+main { margin-top: 28px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.grid.subjects { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+
+/* Kort: bruges både til fag (forsiden) og dokumenter (fagsiderne) */
+.card {
+  display: flex; flex-direction: column; gap: 6px;
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 10px;
+  padding: 16px 18px; box-shadow: var(--shadow);
+  color: inherit; text-decoration: none;
+  transition: border-color .15s, transform .15s;
+}
+a.card:hover { border-color: var(--pen); transform: translateY(-1px); }
+.card .type { font-size: 12px; font-weight: 600; color: var(--teacher); background: var(--teacher-bg); align-self: flex-start; padding: 2px 8px; border-radius: 99px; }
+.card h2, .card h3 { font: 700 21px/1.25 var(--doc); margin: 2px 0 0; }
+.card h3 { font-size: 19px; }
+.card p { margin: 0; color: var(--ink-2); font-size: 14px; }
+.card .go { margin-top: auto; padding-top: 4px; color: var(--pen); font-weight: 600; font-size: 14px; }
+.card.soon { background: transparent; border-style: dashed; box-shadow: none; }
+.card.soon h2 { color: var(--muted); }
+.card.soon p, .card.soon .go { color: var(--muted); font-weight: 500; }
+
+footer { margin: 44px 0 28px; color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } a.card:hover { transform: none; } }
