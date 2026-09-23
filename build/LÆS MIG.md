@@ -43,7 +43,7 @@ Fælles stil og temaknapper ligger i `assets/site.css` og `assets/site.js`.
 GitHub bygger siden igen, hver gang der bliver pushet til `main`.
 
 1. Ret skabelonen eller kommentarfilen, og kør `python build/build_html.py ...`
-2. Er det et nyt dokument, så sæt `"ud"` til fagets mappe (fx `"kemi/titel.html"`), tilføj et kort på fagsiden,
-   og ret antallet på forsiden. Første dokument i et nyt fag: kopiér `fysik/index.html` til fagets mappe, og gør
+2. Er det et nyt dokument, så sæt `"ud"` til fagets mappe (fx `"kemi/titel.html"`), erstat det rigtige
+   "Kommer snart"-kort på fagsiden (under dokumenttypen og klassetrinnet) med et link-kort, og ret antallet på forsiden. Første dokument i et nyt fag: kopiér `fysik/index.html` til fagets mappe, og gør
    fagets "Kommer snart"-kort på forsiden til et link (`<a class="card" href="kemi/">`).
 3. `git add -A`, `git commit -m "..."` og `git push`. Siden er opdateret efter et minut eller to.

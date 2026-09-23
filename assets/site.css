@@ -53,7 +53,17 @@ h1 { font: 700 34px/1.15 var(--doc); margin: 0 0 6px; letter-spacing: -.01em; }
 .seg button[aria-pressed="true"] { background: var(--pen-soft); color: var(--pen); font-weight: 600; }
 .seg svg { width: 15px; height: 15px; flex: none; }
 
+/* Hop-links til sektionerne på en fagside */
+.jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.jump a { font-size: 13px; font-weight: 600; text-decoration: none; color: var(--ink-2); background: var(--paper); border: 1px solid var(--rule); border-radius: 99px; padding: 5px 12px; }
+.jump a:hover { color: var(--pen); border-color: var(--pen); }
+
 main { margin-top: 28px; }
+html { scroll-behavior: smooth; }
+.doctype { scroll-margin-top: 16px; }
+.doctype + .doctype { margin-top: 40px; }
+.doctype > h2 { font: 700 24px/1.2 var(--doc); margin: 0 0 4px; }
+.doctype .intro { margin: 0 0 14px; color: var(--ink-2); max-width: 62ch; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
 .grid.subjects { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
 
@@ -72,8 +82,9 @@ a.card:hover { border-color: var(--pen); transform: translateY(-1px); }
 .card p { margin: 0; color: var(--ink-2); font-size: 14px; }
 .card .go { margin-top: auto; padding-top: 4px; color: var(--pen); font-weight: 600; font-size: 14px; }
 .card.soon { background: transparent; border-style: dashed; box-shadow: none; }
-.card.soon h2 { color: var(--muted); }
+.card.soon h2, .card.soon h3 { color: var(--muted); }
+.card.soon .type { color: var(--muted); background: transparent; border: 1px solid var(--rule); }
 .card.soon p, .card.soon .go { color: var(--muted); font-weight: 500; }
 
 footer { margin: 44px 0 28px; color: var(--muted); font-size: 13px; }
-@media (prefers-reduced-motion: reduce) { .card { transition: none; } a.card:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .card { transition: none; } a.card:hover { transform: none; } }

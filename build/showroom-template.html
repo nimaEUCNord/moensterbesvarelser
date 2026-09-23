@@ -80,6 +80,9 @@ h1, h2, h3 { text-wrap: balance; }
 
 /* ---------- Intro ---------- */
 .intro { padding-block: 40px 28px; display: grid; gap: 24px; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: end; }
+.crumbs { font-size: 14px; font-weight: 600; color: var(--muted); margin: 0 0 14px; }
+.crumbs a { text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; }
 .eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 0 8px; }
 .intro h1 { font-family: var(--doc); font-size: clamp(28px, 4.2vw, 42px); line-height: 1.12; margin: 0 0 12px; font-weight: 700; letter-spacing: -.01em; }
 .intro .lead { margin: 0; color: var(--ink-2); font-size: 16.5px; max-width: 58ch; }
@@ -310,6 +313,7 @@ footer { max-width: 1200px; margin: 40px auto 0; padding-block: 20px 36px; color
 
 <header class="wrap intro">
   <div>
+    <nav class="crumbs" aria-label="Brødkrummer"><a href="../">Mønsterbesvarelser</a> › <a href="./">Fysik</a></nav>
     <p class="eyebrow">Fysik C · 1g · Eksempel på god aflevering</p>
     <h1>Sådan ser en god journal ud: Hookes lov</h1>
     <p class="lead">Her er en journal om fjederkonstanten, skrevet af en elev i Word med WordMat. Den er ikke perfekt, men den gør det, vi leder efter, når vi retter. Brug den som model, når du skriver din egen.</p>
