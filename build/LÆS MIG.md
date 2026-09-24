@@ -2,7 +2,7 @@
 
 Siden `fysik/hookes-lov-journal.html` bygges ud fra en PDF og en liste med lærerkommentarer.
 Resultatet er én selvstændig HTML-fil, der virker offline og kan lægges på Lectio/Teams.
-Den kan også lægges på hjemmesiden https://mosskov.github.io/moensterbesvarelser/ (se Publicering nederst).
+Den kan også lægges på hjemmesiden https://nimaeucnord.github.io/moensterbesvarelser/ (se Publicering nederst).
 
 ## Ny journal (fx en anonymiseret elevjournal)
 
@@ -49,11 +49,11 @@ Skitsen `journal/figur1-skitse.png` er et skærmbillede af `build/figur1-skitse.
 
 ## Publicering (GitHub Pages)
 
-Første gang (ikke gjort endnu):
-`gh repo create Mosskov/moensterbesvarelser --public --source . --push` og derefter
-`gh api -X POST repos/Mosskov/moensterbesvarelser/pages -f "source[branch]=main" -f "source[path]=/"`
+Første gang (ikke gjort endnu). Siden udgives fra arbejdskontoen nimaEUCNord, så skift først med `gh auth switch -u nimaEUCNord`:
+`gh repo create nimaEUCNord/moensterbesvarelser --public --source . --push` og derefter
+`gh api -X POST repos/nimaEUCNord/moensterbesvarelser/pages -f "source[branch]=main" -f "source[path]=/"`
 
-Hjemmesiden er repoet `Mosskov/moensterbesvarelser`. Forsiden `index.html` viser kun fagene.
+Hjemmesiden er repoet `nimaEUCNord/moensterbesvarelser`. Forsiden `index.html` viser kun fagene.
 Hvert fag har sin egen mappe med en fagside (fx `fysik/index.html`), der viser fagets dokumenter.
 Fælles stil og temaknapper ligger i `assets/site.css` og `assets/site.js`.
 Guiderne (Word, Excel, WordMat) ligger i `vaerktoejer/` og er almindelige, håndskrevne HTML-sider, der ikke bygges.
