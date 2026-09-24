@@ -156,7 +156,8 @@ const doc = new Document({
       EQ('F=m⋅g=0,150" kg"⋅9,82" m"∕"s"^2 =1,473" N"'),
       EQ('Δx=L-L_0=19,7" cm"-12,3" cm"=7,4" cm"=0,074" m"'),
       P(`Grafen viser ${I("F")} som funktion af ${I("Δx")}. Vi har lavet et punktdiagram med en lineær tendenslinje i Excel.`, { keepNext: true }),
-      img("figur2-graf.png", 540, 326),
+      // Pladsholder: finish_word.ps1 sætter et rigtigt diagram ind her (med data integreret i dokumentet).
+      new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 120, after: 60 }, keepNext: true, children: [new TextRun("[[GRAF]]")] }),
       caption("Figur", "Kraften F som funktion af forlængelsen Δx. Punkterne er målinger, og den stiplede linje er den lineære tendenslinje.", { alignment: AlignmentType.CENTER }),
       P(`Punkterne ligger på en ret linje tæt på (0,0), så ${I("F")} er proportional med ${I("Δx")}, som (1) siger. Hældningen er fjederkonstanten: ${I('k=19,95" N"∕"m"')}. Skæringen med y-aksen er 0,0024 N, og det er så tæt på 0, at det ligger inden for måleusikkerheden.`),
 

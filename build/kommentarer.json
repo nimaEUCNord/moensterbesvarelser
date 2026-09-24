@@ -57,7 +57,7 @@
       "tekst": "Én eksempelberegning i WordMat med tal <em>og</em> enheder viser, at du kan regne det. Du behøver ikke vise alle syv beregninger, for resten står i tabellen."
     },
     {
-      "billede": 2,
+      "figur": 2,
       "tekst": "Punktdiagram med aksetitler og enheder, kun punkter (ingen streger mellem dem), en lineær tendenslinje og ligningen vist. Figurteksten forklarer, hvad man ser.",
       "typiskFejl": { "emne": "grafen", "svag": "Titlen hedder ”Diagramtitel”, akserne har ingen titler, og punkterne er forbundet med en kurve.", "staerk": "Punktdiagram (XY), aksetitler med enhed, en lineær tendenslinje og ligningen vist." },
       "guide": { "titel": "Punktdiagram med lineær regression", "href": "../vaerktoejer/punktdiagram-lineaer-regression.html" }

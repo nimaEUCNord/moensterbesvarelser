@@ -6,7 +6,8 @@ kommentarer.json angiver PDF'en, evt. Word-filen og en liste af kommentarer. Hve
 peger på et sted i PDF'en med et citat:
     "start": første ord i tekststykket,  "slut": sidste ord (valgfri),
     "boks": true  -> markér som én kasse (til lister, tabeller, ligninger)
-eller på et billede:  "billede": 0, 1, 2 ...  (billederne talt i rækkefølge fra forsiden).
+eller på et billede:  "billede": 0, 1, 2 ...  (billederne talt i rækkefølge fra forsiden),
+eller på en figur:    "figur": 2  (billedet eller diagrammet lige over figurteksten "Figur 2:").
 Mellemrum og kursiv matematik betyder ikke noget for søgningen.
 """
 import base64, html as H, io, json, os, re, sys, unicodedata
@@ -54,6 +55,18 @@ def find(snippet, frm=0):
         i = joined.find(s, i + 1)
     return i, len(s)
 
+def figure_rect(nr):
+    """Billedet eller diagrammet (vektorgrafik) lige over figurteksten "Figur nr:"."""
+    i, _ = find(f"Figur {nr}:")
+    if i < 0:
+        return None
+    cap = words[owner[i]]
+    p, top = cap["p"], cap["r"][1]
+    page = doc[p]
+    cands = [fitz.Rect(b["bbox"]) for b in page.get_image_info()] + [d["rect"] for d in page.get_drawings()]
+    cands = [r for r in cands if top - 40 <= r.y1 <= top + 1 and r.width > 50 and r.height > 50]
+    return (p, max(cands, key=lambda r: r.width * r.height)) if cands else None
+
 def pct(p, x0, y0, x1, y1, pad=2.5):
     W, H = pages[p]["w"], pages[p]["h"]
     x0, y0, x1, y1 = x0 - pad, y0 - pad, x1 + pad, y1 + pad
@@ -68,6 +81,13 @@ for n, c in enumerate(cfg["kommentarer"], 1):
         p, b = images[c["billede"]]
         rects = [(p,) + tuple(b)]
         mx, my, mp = b[2], b[1] + 10, p
+    elif "figur" in c:
+        f = figure_rect(c["figur"])
+        if not f:
+            errors.append(f"#{n}: fandt ingen figur over figurteksten \"Figur {c['figur']}:\""); continue
+        p, b = f
+        rects = [(p, b.x0, b.y0, b.x1, b.y1)]
+        mx, my, mp = b.x1, b.y0 + 10, p
     else:
         i, L = find(c["start"])
         if i < 0:

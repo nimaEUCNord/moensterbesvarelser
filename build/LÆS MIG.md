@@ -12,6 +12,8 @@ Den kan også lægges på hjemmesiden https://mosskov.github.io/moensterbesvarel
    - `"start"`: de første ord i tekststykket, og `"slut"`: de sidste ord (valgfri)
    - `"boks": true` markerer det hele som én kasse (godt til lister, tabeller og ligninger)
    - `"billede": 0` peger på et billede i stedet (billederne tælles fra forsiden, startende med 0)
+   - `"figur": 2` peger på billedet eller diagrammet lige over figurteksten "Figur 2:". Brug det til
+     diagrammer fra Excel, som i PDF'en er tegninger og ikke billeder.
    - `"typiskFejl"` (valgfri) viser en svag og en stærk formulering under kommentaren
    - `"guide"` (valgfri) viser et link til en guide under kommentaren, fx
      `{"titel": "Punktdiagram med lineær regression", "href": "../vaerktoejer/punktdiagram-lineaer-regression.html#aflaes-haeldningen"}`
@@ -35,11 +37,12 @@ Kræver Python med `pymupdf` (`pip install pymupdf`).
 
 Journalen er bygget af scripts, så den kan ændres og bygges igen:
 
-1. `powershell -File build/excel_chart.ps1`: Figur 2 som et Excel-punktdiagram (`journal/figur2-graf.png`)
-2. `node build/make_docx.js <raa.docx>`: Word-dokumentet med ligninger som pladsholdere (kræver `npm install` første gang)
-3. `powershell -File build/finish_word.ps1 <raa.docx> "journal/Hookes lov - journal"`: Word laver
-   ligningerne om til rigtige Word-ligninger (som WordMat), opdaterer indholdsfortegnelsen og gemmer .docx og .pdf
-4. `python build/build_html.py`
+1. `node build/make_docx.js <raa.docx>`: Word-dokumentet med ligninger som pladsholdere (kræver `npm install` første gang)
+2. `powershell -File build/finish_word.ps1 <raa.docx> "journal/Hookes lov - journal"`: Word laver
+   ligningerne om til rigtige Word-ligninger (som WordMat), sætter Figur 2 ind som et rigtigt diagram med
+   integreret projektmappe, opdaterer indholdsfortegnelsen og gemmer .docx og .pdf. Excels decimaltegn
+   sættes til komma under kørslen og stilles tilbage bagefter.
+3. `python build/build_html.py`
 
 Skitsen `journal/figur1-skitse.png` er et skærmbillede af `build/figur1-skitse.html`.
 
