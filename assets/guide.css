@@ -7,6 +7,9 @@
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 20px 32px; align-items: start;
   scroll-margin-top: 16px;
 }
+/* Brede skærmbilleder (fx Words bånd): tekst over billedet i fuld bredde */
+.step.wide { grid-template-columns: minmax(0, 1fr); }
+.step.wide .step-text { max-width: 75ch; }
 .step-text h3 { font-size: 18px; margin: 0 0 8px; display: flex; gap: 10px; align-items: baseline; }
 .step-no { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--xl); color: #fff; font: 700 14px/28px var(--sans); text-align: center; transform: translateY(-2px); }
 .step-text p, .step-text ul, .step-text ol { margin: 0 0 10px; color: var(--ink-2); }

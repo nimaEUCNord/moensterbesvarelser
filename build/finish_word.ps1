@@ -83,6 +83,22 @@ function Add-Figur2($doc) {
   $s.AlternativeText = "Punktdiagram af kraften F som funktion af forlængelsen Δx med lineær tendenslinje: y = 19,95x + 0,0024, R² = 0,9998."
 }
 
+# Datatabellen får udseendet på samme måde som i guiden "Tabel med tabeltekst": tabeltypografien
+# Gittertabel 1 - lys - farve 1 uden fed første kolonne, lyseblå skygge i overskriftsrækken,
+# Tilpas automatisk til vindue og Centreret.
+function Format-Datatabel($doc) {
+  $t = $null
+  foreach ($x in $doc.Tables) { if ($x.Cell(1, 1).Range.Text -like "Masse*") { $t = $x } }
+  if (-not $t) { throw "Fandt ikke datatabellen" }
+  try { $t.Style = "Grid Table 1 Light Accent 1" } catch { $t.Style = "Gittertabel 1 - lys - farve 1" }
+  $t.ApplyStyleHeadingRows = $true; $t.ApplyStyleFirstColumn = $false
+  $t.ApplyStyleLastRow = $false; $t.ApplyStyleLastColumn = $false
+  $t.Rows.Item(1).Shading.BackgroundPatternColor = -738132173   # Markeringsfarve 1, lysere 80 %
+  $t.AutoFitBehavior(2)                                          # Tilpas automatisk til vindue
+  $t.Range.ParagraphFormat.Alignment = 1                         # Centreret (vandret)
+  $t.Range.Cells.VerticalAlignment = 1                           # og lodret
+}
+
 $oldSep = Set-ExcelSeparators $false "," "."
 $word = New-Object -ComObject Word.Application
 $word.Visible = $false
@@ -109,6 +125,8 @@ try {
     $n++
   }
   "Ligninger: $n"
+  Format-Datatabel $doc
+  "Tabel 1: formateret"
   Add-Figur2 $doc
   Start-Sleep 3   # Word er optaget et øjeblik, mens diagrammet tegnes
   "Figur 2: diagram indsat"

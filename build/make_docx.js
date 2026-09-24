@@ -6,8 +6,8 @@ const fs = require("fs");
 const path = require("path");
 const {
   Document, Packer, Paragraph, TextRun, ImageRun, Table, TableRow, TableCell, Header, Footer,
-  AlignmentType, HeadingLevel, LevelFormat, BorderStyle, WidthType, ShadingType, TabStopType,
-  TabStopPosition, PageNumber, TableOfContents, SequentialIdentifier, PageBreak, VerticalAlign,
+  AlignmentType, HeadingLevel, LevelFormat, BorderStyle, WidthType, TabStopType,
+  TabStopPosition, PageNumber, TableOfContents, SequentialIdentifier, PageBreak,
 } = require("docx");
 
 const out = process.argv[2] || path.join(__dirname, "..", "journal", "_raa.docx");
@@ -47,14 +47,13 @@ const data = [
   [0, "12,3", "0,000", "0,000"], [50, "14,8", "0,025", "0,491"], [100, "17,1", "0,048", "0,982"],
   [150, "19,7", "0,074", "1,473"], [200, "22,2", "0,099", "1,964"], [250, "24,5", "0,122", "2,455"], [300, "27,1", "0,148", "2,946"],
 ];
-const line = { style: BorderStyle.SINGLE, size: 4, color: "8EAADB" };
-const cellBorders = { top: line, bottom: line, left: line, right: line };
+// Tabellen er bevidst uformateret (som når den kopieres fra Excel). finish_word.ps1 giver den udseendet
+// på samme måde som guiden "Tabel med tabeltekst": tabeltypografi, skygge i overskriften og centrering.
 const COLW = [2000, 2000, 2400, 2000];
 const cell = (t, head, i) => new TableCell({
-  borders: cellBorders, width: { size: COLW[i], type: WidthType.DXA }, verticalAlign: VerticalAlign.CENTER,
-  shading: head ? { type: ShadingType.CLEAR, color: "auto", fill: "D9E2F3" } : undefined,
+  width: { size: COLW[i], type: WidthType.DXA },
   margins: { top: 40, bottom: 40, left: 100, right: 100 },
-  children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 0 }, children: runs(t, head ? { bold: true } : {}) })],
+  children: [new Paragraph({ spacing: { after: 0 }, children: runs(t) })],
 });
 const dataTable = new Table({
   width: { size: COLW.reduce((a, b) => a + b), type: WidthType.DXA }, columnWidths: COLW, alignment: AlignmentType.CENTER,

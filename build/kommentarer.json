@@ -50,7 +50,8 @@
     {
       "start": "Tabel 1:", "slut": "2,946", "boks": true,
       "tekst": "Enhederne står i kolonneoverskriften og ikke ved hvert tal. De målte værdier (L) og de beregnede (Δx og F) står hver for sig, så man kan se, hvad I faktisk målte. Tabellen har nummer og tekst over sig.",
-      "typiskFejl": { "emne": "tabellen", "svag": "Kolonner der hedder ”vægt” og ”længde” uden enheder, og kun de beregnede tal.", "staerk": "”Masse m / g”, ”Position L / cm”, ”Forlængelse Δx / m”: størrelse, symbol og enhed." }
+      "typiskFejl": { "emne": "tabellen", "svag": "Kolonner der hedder ”vægt” og ”længde” uden enheder, og kun de beregnede tal.", "staerk": "”Masse m / g”, ”Position L / cm”, ”Forlængelse Δx / m”: størrelse, symbol og enhed." },
+      "guide": { "titel": "Tabel med tabeltekst", "href": "../vaerktoejer/tabel-med-tabeltekst.html" }
     },
     {
       "start": "F= m⋅g= 0,150", "slut": "0,074 m", "boks": true,

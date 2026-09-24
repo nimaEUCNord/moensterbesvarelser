@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tabel med tabeltekst – Mønsterbesvarelser</title>
+<meta name="description" content="Sådan flytter du en tabel fra Excel over i Word, giver den et pænt udseende med fanen Tabeldesign og tilføjer en nummereret tabeltekst.">
+<script>
+  try { var t = localStorage.getItem("hooke-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/guide.css">
+</head>
+<body>
+<div class="sitebar">
+  <div class="wrap wide">
+    <a class="brand" href="../">Mønsterbesvarelser</a>
+    <nav class="sitenav" aria-label="Hovedmenu"><a href="../fysik/">Fysik</a><a href="./#word" aria-current="true">Værktøjer</a></nav>
+    <button class="theme-btn" type="button" id="theme" aria-label="Tema"></button>
+  </div>
+</div>
+<div class="wrap wide">
+  <header>
+    <div>
+      <a class="back-ref" id="back-ref" hidden>← Tilbage til dokumentet</a>
+      <h1>Tabel med tabeltekst</h1>
+      <p class="lede">Sådan flytter du en færdig tabel fra Excel over i Word og giver den et pænt udseende og en nummereret tabeltekst. Eksemplet bruger <a href="../fysik/hookes-lov-journal.html">målinger fra et forsøg med Hookes lov</a>, hvor du kan se tabellen brugt i en journal. Fremgangsmåden er den samme for alle data. Menunavnene passer til dansk Excel og Word 365, og de røde markeringer viser, hvor du skal klikke.</p>
+    </div>
+  </header>
+
+  <main>
+  <div class="steps">
+
+    <article class="step" id="kopier-til-word">
+      <div class="step-text">
+        <h3><span class="step-no">1</span>Kopiér tabellen til Word</h3>
+        <p class="tipbox good"><b>Før du starter:</b> Gør tabellen færdig i Excel. Overskrifterne skal stå på formen <b>navn symbol / enhed</b>, fx <b>Masse m / g</b>, og alle tal i en kolonne skal have lige mange decimaler. Word får tallene, som Excel viser dem.</p>
+        <p>Markér hele tabellen i Excel <b>inklusive overskrifterne</b>, og tryk <kbd>Ctrl</kbd>+<kbd>C</kbd>. Gå til Word, og tryk <kbd>Ctrl</kbd>+<kbd>V</kbd>.</p>
+        <p><span class="n-ref">1</span> Tabellen bliver en almindelig Word-tabel, som du kan rette i. Den er ikke sammenkædet med Excel, så hvis du ændrer tallene i Excel, skal du kopiere tabellen igen.</p>
+        <p>Den ser ikke ud af meget endnu: Der er ingen streger, og lange overskrifter deler sig over to linjer. Det ordner du i de næste trin.</p>
+        <p class="tipbox"><b>Indsæt ikke tabellen som billede</b> eller som et Excel-objekt. Et billede kan ikke rettes og bliver uskarpt, og et Excel-objekt følger ikke Word-dokumentets skrift og typografier.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:600;--ih:235">
+          <img src="billeder/tabel-trin-1.png" width="600" height="235" alt="Tabellen er sat ind i Word under en linje tekst. Den har ingen streger, og overskriften Forlængelse Δx / m deler sig over to linjer.">
+          <span class="hl" data-n="1" style="--x:8;--y:33;--w:522;--h:174"></span>
+        </div>
+      </figure>
+    </article>
+
+    <article class="step wide" id="tabeldesign">
+      <div class="step-text">
+        <h3><span class="step-no">2</span>Mød fanen Tabeldesign</h3>
+        <p>Klik et sted i tabellen, så fanerne <b>Tabeldesign</b> og <b>Tabellayout</b> kommer frem. På Tabeldesign bestemmer du, hvordan tabellen ser ud:</p>
+        <p><span class="n-ref">1</span> <b>Indstillinger for tabeltypografi:</b> hvilke dele der skal fremhæves, fx <b>Kolonneoverskrift</b> (første række).</p>
+        <p><span class="n-ref">2</span> <b>Tabeltypografier:</b> færdige udseender med streger og farver. Klik på pilen i højre side af galleriet for at se dem alle. Når du holder musen over en typografi, viser Word den på din tabel.</p>
+        <p><span class="n-ref">3</span> <b>Skygge:</b> baggrundsfarve i de celler, du har markeret.</p>
+        <p><span class="n-ref">4</span> <b>Kanter:</b> stregernes type, tykkelse og farve.</p>
+        <p class="tipbox good"><b>Der er ikke kun én rigtig måde.</b> Det vigtigste er, at tabellen er nem at læse: en tydelig overskriftsrække og diskrete streger. I de næste trin laver du samme udseende som i <a href="../fysik/hookes-lov-journal.html">journalen</a>.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:1232;--ih:510">
+          <img src="billeder/tabel-trin-2.png" width="1232" height="510" alt="Fanen Tabeldesign i Word med galleriet Tabeltypografier foldet ud: Almindelige tabeller, Gittertabeller og Listetabeller. Til højre ses knapperne Skygge og Kanter.">
+          <span class="hl" data-n="1" style="--x:14;--y:32;--w:256;--h:96"></span>
+          <span class="hl" data-n="2" style="--x:281;--y:41;--w:533;--h:466"></span>
+          <span class="hl" data-n="3" style="--x:816;--y:32;--w:44;--h:70"></span>
+          <span class="hl" data-n="4" style="--x:870;--y:32;--w:354;--h:96"></span>
+        </div>
+      </figure>
+    </article>
+
+    <article class="step wide" id="typografi">
+      <div class="step-text">
+        <h3><span class="step-no">3</span>Vælg en tabeltypografi</h3>
+        <p><span class="n-ref">1</span> Fold galleriet ud, og vælg <b>Gittertabel 1 - lys - farve 1</b> (nummer to i første række under Gittertabeller). Den giver tynde blå streger og en fed overskriftsrække.</p>
+        <p><span class="n-ref">2</span> Fjern fluebenet ved <b>Første kolonne</b>, så det kun er overskriftsrækken, der er fed.</p>
+        <p><span class="n-ref">3</span> Lad fluebenet ved <b>Kolonneoverskrift</b> blive.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:992;--ih:470">
+          <img src="billeder/tabel-trin-3.png" width="992" height="470" alt="Galleriet Tabeltypografier med musen over Gittertabel 1 - lys - farve 1. Til højre ses tabellen med blå streger og fed overskrift.">
+          <span class="hl" data-n="1" style="--x:352;--y:260;--w:75;--h:56"></span>
+          <span class="hl" data-n="2" style="--x:142;--y:34;--w:104;--h:22"></span>
+          <span class="hl" data-n="3" style="--x:19;--y:34;--w:120;--h:22"></span>
+        </div>
+      </figure>
+    </article>
+
+    <article class="step" id="skygge">
+      <div class="step-text">
+        <h3><span class="step-no">4</span>Giv overskriftsrækken en farve</h3>
+        <p><span class="n-ref">1</span> Markér overskriftsrækken.</p>
+        <p><span class="n-ref">2</span> Klik på pilen under <b>Skygge</b> på fanen Tabeldesign.</p>
+        <p><span class="n-ref">3</span> Vælg <b>Dybblå, Markeringsfarve 1, lysere 80 %</b>. Det er samme farve som stregerne, bare lysere.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:775;--ih:495">
+          <img src="billeder/tabel-trin-4.png" width="775" height="495" alt="Menuen Skygge er åben, og musen peger på Dybblå, Markeringsfarve 1, lysere 80 %. Overskriftsrækken i tabellen er lyseblå.">
+          <span class="hl" data-n="1" style="--x:13;--y:269;--w:390;--h:38"></span>
+          <span class="hl" data-n="2" style="--x:399;--y:32;--w:44;--h:76"></span>
+          <span class="hl" data-n="3" style="--x:514;--y:221;--w:28;--h:28"></span>
+        </div>
+      </figure>
+    </article>
+
+    <article class="step wide" id="tabellayout">
+      <div class="step-text">
+        <h3><span class="step-no">5</span>Tilpas bredden, og centrér tallene</h3>
+        <p><span class="n-ref">1</span> Markér hele tabellen ved at klikke på håndtaget øverst til venstre.</p>
+        <p><span class="n-ref">2</span> Gå til fanen <span class="path">Tabellayout</span>.</p>
+        <p><span class="n-ref">3</span> Vælg <span class="path">Tilpas automatisk<span class="sep">→</span>Tilpas automatisk til vindue</span>. Tabellen bliver lige så bred som teksten, og overskrifterne kommer på én linje.</p>
+        <p><span class="n-ref">4</span> Klik på <b>Centreret</b> i gruppen Justering, så tal og overskrifter står midt i cellerne.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:910;--ih:450">
+          <img src="billeder/tabel-trin-5.png" width="910" height="450" alt="Fanen Tabellayout med hele tabellen markeret. Musen peger på knappen Centreret i gruppen Justering.">
+          <span class="hl" data-n="1" style="--x:44;--y:255;--w:17;--h:17"></span>
+          <span class="hl" data-n="2" style="--x:518;--y:3;--w:80;--h:22"></span>
+          <span class="hl" data-n="3" style="--x:279;--y:85;--w:140;--h:25"></span>
+          <span class="hl r" data-n="4" style="--x:458;--y:57;--w:28;--h:28"></span>
+        </div>
+      </figure>
+    </article>
+
+    <article class="step" id="tabeltekst">
+      <div class="step-text">
+        <h3><span class="step-no">6</span>Tilføj en tabeltekst over tabellen</h3>
+        <p>Klik et sted i tabellen.</p>
+        <p><span class="n-ref">1</span> Gå til fanen <span class="path">Referencer</span>.</p>
+        <p><span class="n-ref">2</span> Klik på <b>Indsæt billedtekst</b>.</p>
+        <p><span class="n-ref">3</span> Tjek, at der står <b>Mærkat: Tabel</b> og <b>Placering: Over markeret objekt</b>.</p>
+        <p><span class="n-ref">4</span> Skriv din tekst efter ”Tabel 1” i feltet Billedtekst, fx <b>: Målte og beregnede værdier.</b></p>
+        <p><span class="n-ref">5</span> Klik på <b>OK</b>.</p>
+        <p class="tipbox good"><b>Tabeltekst over, figurtekst under.</b> Word nummererer selv tabellerne, så nummeret passer, selvom du flytter rundt på dem.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:760;--ih:535">
+          <img src="billeder/tabel-trin-6.png" width="760" height="535" alt="Fanen Referencer i Word med dialogboksen Billedtekst åben. Mærkat er Tabel, Placering er Over markeret objekt, og billedteksten er Tabel 1: Målte og beregnede værdier.">
+          <span class="hl" data-n="1" style="--x:9;--y:2;--w:81;--h:26"></span>
+          <span class="hl" data-n="2" style="--x:400;--y:31;--w:62;--h:81"></span>
+          <span class="hl r" data-n="3" style="--x:383;--y:385;--w:222;--h:49"></span>
+          <span class="hl r" data-n="4" style="--x:318;--y:340;--w:287;--h:24"></span>
+          <span class="hl b" data-n="5" style="--x:442;--y:497;--w:78;--h:26"></span>
+        </div>
+      </figure>
+    </article>
+
+    <article class="step" id="resultat">
+      <div class="step-text">
+        <h3><span class="step-no">7</span>Tjek resultatet</h3>
+        <ul>
+          <li>Tabelteksten står <b>over</b> tabellen og forklarer, hvad den viser. Nævn, hvilke værdier der er målt, og hvilke der er beregnet, og skriv gerne måleusikkerheden.</li>
+          <li>Enhederne står i overskrifterne, og der står kun tal i cellerne.</li>
+          <li>Alle tal i en kolonne har lige mange decimaler.</li>
+          <li>Overskriftsrækken er tydelig, og stregerne er diskrete.</li>
+        </ul>
+        <p>Sammenlign med tabellen i <a href="../fysik/hookes-lov-journal.html">journalen om Hookes lov</a>.</p>
+        <p class="tipbox good"><b>Henvis til tabellen:</b> Skriv fx ”Tabel 1 viser …” i teksten. Med <span class="path">Referencer<span class="sep">→</span>Krydshenvisning</span> bliver nummeret opdateret automatisk.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:940;--ih:338">
+          <img src="billeder/tabel-trin-7.png" width="940" height="338" alt="Den færdige tabel i Word: tabelteksten Tabel 1 over tabellen, lyseblå overskriftsrække med fed skrift, tynde blå streger og centrerede tal.">
+        </div>
+      </figure>
+    </article>
+
+  </div>
+  </main>
+
+  <footer>Samme fremgangsmåde virker for alle tabeller med måledata.</footer>
+</div>
+<script src="../assets/site.js"></script>
+<script src="../assets/guide.js"></script>
+</body>
+</html>
