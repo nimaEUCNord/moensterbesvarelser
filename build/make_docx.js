@@ -59,7 +59,7 @@ const cell = (t, head, i) => new TableCell({
 const dataTable = new Table({
   width: { size: COLW.reduce((a, b) => a + b), type: WidthType.DXA }, columnWidths: COLW, alignment: AlignmentType.CENTER,
   rows: [
-    new TableRow({ tableHeader: true, children: ["Masse m (g)", "Position L (cm)", "Forlængelse Δx (m)", "Kraft F (N)"].map((t, i) => cell(t, true, i)) }),
+    new TableRow({ tableHeader: true, children: ["Masse m / g", "Position L / cm", "Forlængelse Δx / m", "Kraft F / N"].map((t, i) => cell(t, true, i)) }),
     ...data.map((r) => new TableRow({ children: r.map((v, i) => cell(String(v), false, i)) })),
   ],
 });

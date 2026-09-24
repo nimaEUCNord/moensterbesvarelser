@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Punktdiagram med lineær regression – Mønsterbesvarelser</title>
+<meta name="description" content="Sådan laver du et punktdiagram i dansk Excel 365, tilføjer en lineær regression og aflæser hældningen med enhed.">
+<script>
+  try { var t = localStorage.getItem("hooke-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/guide.css">
+</head>
+<body>
+<div class="sitebar">
+  <div class="wrap wide">
+    <a class="brand" href="../">Mønsterbesvarelser</a>
+    <nav class="sitenav" aria-label="Hovedmenu"><a href="../fysik/">Fysik</a><a href="./#excel" aria-current="true">Værktøjer</a></nav>
+    <button class="theme-btn" type="button" id="theme" aria-label="Tema"></button>
+  </div>
+</div>
+<div class="wrap wide">
+  <header>
+    <div>
+      <a class="back-ref" id="back-ref" hidden>← Tilbage til dokumentet</a>
+      <h1>Punktdiagram med lineær regression</h1>
+      <p class="lede">Sådan laver du et punktdiagram i Excel, tilføjer en lineær regression og aflæser hældningen med enhed. I Excel hedder regressionslinjen en <b>tendenslinje</b>. Eksemplet bruger <a href="../fysik/hookes-lov-journal.html">målinger fra et forsøg med Hookes lov</a>, hvor du kan se grafen brugt i en journal. Fremgangsmåden er den samme for alle data. Menunavnene passer til dansk Excel 365, og de røde markeringer viser, hvor du skal klikke.</p>
+    </div>
+  </header>
+
+  <main>
+  <div class="steps">
+
+    <article class="step" id="data">
+      <div class="step-text">
+        <h3><span class="step-no">1</span>Skriv dine data i to kolonner</h3>
+        <p>Skriv x-værdierne i kolonne A og y-værdierne i kolonne B. Excel bruger altid den <b>venstre</b> kolonne som x-akse, så rækkefølgen betyder noget. På x-aksen står den størrelse, du selv har ændret i forsøget.</p>
+        <p><span class="n-ref">1</span> Skriv symbol og enhed i første række på formen <b>symbol / enhed</b>, fx <b>Δx / m</b> og <b>F / N</b>. Skråstregen betyder ”divideret med”, så tallene i kolonnen er rene tal: 0,491 under <b>F / N</b> betyder, at <i>F</i> = 0,491 N.</p>
+        <p class="tipbox"><span class="n-ref">2</span> <b>Pas på kommaet:</b> I dansk Excel skal du skrive <kbd>0,025</kbd>, ikke <kbd>0.025</kbd>. Med punktum tror Excel, at det er tekst eller en dato, og så kommer punktet ikke med på grafen.</p>
+        <p class="example">I eksemplet er en fjeder trukket ud af lodder. Forlængelsen Δ<i>x</i> er x, og kraften <i>F</i> er y.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:352;--ih:314">
+          <img src="billeder/punktdiagram-trin-1.png" width="352" height="314" alt="Excel-ark med Δx / m i A1 og F / N i B1 og syv måletal under hver. Celle A3 er valgt, og formellinjen viser 0,025.">
+          <span class="hl" data-n="1" style="--x:36;--y:60;--w:212;--h:36"></span>
+          <span class="hl b" data-n="2" style="--x:214;--y:1;--w:136;--h:27"></span>
+        </div>
+      </figure>
+    </article>
+
+    <article class="step" id="punktdiagram">
+      <div class="step-text">
+        <h3><span class="step-no">2</span>Indsæt et punktdiagram</h3>
+        <p><span class="n-ref">1</span> Markér dine data <b>inklusive overskrifterne</b> (her A1:B8).</p>
+        <p><span class="n-ref">2</span> Gå til fanen <span class="path">Indsæt</span>.</p>
+        <p><span class="n-ref">3</span> Klik på ikonet <b>Indsæt punktdiagram (X, Y) eller boblediagram</b> i gruppen Diagrammer.</p>
+        <p><span class="n-ref">4</span> Vælg den første under <b>Punkt</b>, som kun viser punkterne.</p>
+        <p class="tipbox"><b>Vælg ikke ”Kurve”</b> eller et punktdiagram med streger. Et kurvediagram placerer punkterne med lige stor afstand, uanset hvad x-værdierne er, og streger mellem punkterne hører ikke til måledata.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:792;--ih:395">
+          <img src="billeder/punktdiagram-trin-2.png" width="792" height="395" alt="Fanen Indsæt i Excel med data markeret i A1:B8 og menuen Punkt åben under ikonet for punktdiagram.">
+          <span class="hl b" data-n="1" style="--x:24;--y:188;--w:140;--h:164"></span>
+          <span class="hl r" data-n="2" style="--x:113;--y:1;--w:54;--h:27"></span>
+          <span class="hl" data-n="3" style="--x:578;--y:82;--w:47;--h:30"></span>
+          <span class="hl" data-n="4" style="--x:586;--y:140;--w:51;--h:51"></span>
+        </div>
+      </figure>
+    </article>
+
+    <article class="step" id="aksetitler">
+      <div class="step-text">
+        <h3><span class="step-no">3</span>Slå aksetitler til</h3>
+        <p>Klik på diagrammet, så der kommer tre knapper ved siden af det.</p>
+        <p><span class="n-ref">1</span> Klik på <b>+</b> (Diagramelementer).</p>
+        <p><span class="n-ref">2</span> Sæt flueben i <b>Aksetitler</b>. Der kommer nu en ”Aksetitel” ved hver akse.</p>
+        <p><span class="n-ref">3</span> Fjern fluebenet ved <b>Diagramtitel</b>, eller skriv en rigtig titel. Excel bruger bare overskriften fra kolonne B, og figurteksten i dit dokument forklarer alligevel grafen.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:710;--ih:315">
+          <img src="billeder/punktdiagram-trin-3.png" width="710" height="315" alt="Diagrammet er valgt, og menuen Diagramelementer er åben ved plusknappen med flueben i Akser, Aksetitler, Diagramtitel og Gitterlinjer.">
+          <span class="hl" data-n="1" style="--x:497;--y:10;--w:36;--h:36"></span>
+          <span class="hl r" data-n="2" style="--x:551;--y:62;--w:110;--h:22"></span>
+          <span class="hl r b" data-n="3" style="--x:551;--y:85;--w:110;--h:22"></span>
+        </div>
+      </figure>
+    </article>
+
+    <article class="step" id="skriv-aksetitler">
+      <div class="step-text">
+        <h3><span class="step-no">4</span>Skriv aksetitler med enheder</h3>
+        <p>Klik på teksten ”Aksetitel” ved hver akse, og skriv størrelse og enhed på samme form som i tabellen. Du kan skrive navnet på størrelsen foran, så grafen er nem at læse:</p>
+        <p><span class="n-ref">1</span> y-aksen: <b>Kraft F / N</b></p>
+        <p><span class="n-ref">2</span> x-aksen: <b>Forlængelse Δx / m</b></p>
+        <p class="tipbox good"><b>Græske bogstaver:</b> Δ finder du under <span class="path">Indsæt<span class="sep">→</span>Symboler<span class="sep">→</span>Symbol</span>. Du kan også kopiere det fra overskriften i tabellen.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:540;--ih:315">
+          <img src="billeder/punktdiagram-trin-4.png" width="540" height="315" alt="Punktdiagrammet med aksetitlerne Kraft F / N på y-aksen og Forlængelse Δx / m på x-aksen og uden diagramtitel.">
+          <span class="hl" data-n="1" style="--x:19;--y:102;--w:28;--h:68"></span>
+          <span class="hl r" data-n="2" style="--x:210;--y:266;--w:114;--h:25"></span>
+        </div>
+      </figure>
+    </article>
+
+    <article class="step" id="tendenslinje">
+      <div class="step-text">
+        <h3><span class="step-no">5</span>Tilføj en tendenslinje</h3>
+        <p><span class="n-ref">1</span> <b>Højreklik</b> præcis på et af punkterne. Alle punkterne bliver markeret.</p>
+        <p><span class="n-ref">2</span> Vælg <b>Tilføj tendenslinje…</b></p>
+        <p class="tipbox"><b>Er menuen anderledes?</b> Så har du ramt ved siden af punktet. Tryk <kbd>Esc</kbd>, og prøv igen.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:610;--ih:335">
+          <img src="billeder/punktdiagram-trin-5.png" width="610" height="335" alt="Højreklikmenuen på et datapunkt med punktet Tilføj tendenslinje.">
+          <span class="hl" data-n="1" style="--x:358;--y:81;--w:22;--h:22"></span>
+          <span class="hl" data-n="2" style="--x:371;--y:267;--w:232;--h:31"></span>
+        </div>
+      </figure>
+    </article>
+
+    <article class="step" id="vis-ligning">
+      <div class="step-text">
+        <h3><span class="step-no">6</span>Vælg lineær, og vis ligningen</h3>
+        <p>Ruden <b>Formatér tendenslinje</b> åbner i højre side.</p>
+        <p><span class="n-ref">1</span> Tjek, at <b>Lineær</b> er valgt.</p>
+        <p><span class="n-ref">2</span> Sæt flueben i <b>Vis ligning i diagram</b> og <b>Vis R-kvadreret værdi i diagram</b>. Ligningen og R² kommer nu frem på grafen.</p>
+        <p class="tipbox good"><b>Skal linjen gå gennem (0,0)?</b> Hvis teorien siger, at y er proportional med x, kan du sætte flueben i <b>Angiv skæring</b> og skrive 0. Lad være, hvis du vil undersøge, om dine data passer med teorien: Så er skæringen med y-aksen en del af svaret.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:275;--ih:612">
+          <img src="billeder/punktdiagram-trin-6.png" width="275" height="612" alt="Ruden Formatér tendenslinje med Lineær valgt og flueben i Vis ligning i diagram og Vis R-kvadreret værdi i diagram.">
+          <span class="hl" data-n="1" style="--x:70;--y:200;--w:66;--h:26"></span>
+          <span class="hl" data-n="2" style="--x:29;--y:558;--w:196;--h:52"></span>
+        </div>
+      </figure>
+    </article>
+
+    <article class="step" id="aflaes-haeldningen">
+      <div class="step-text">
+        <h3><span class="step-no">7</span>Aflæs hældningen, og skriv den med enhed</h3>
+        <p>Excel skriver ligningen som <b>y = ax + b</b>. Excel kender ikke dine enheder, så du skal selv sætte dem på:</p>
+        <ul>
+          <li><b>Hældningen</b> <i>a</i> (tallet foran x) har enheden <b>y-aksens enhed / x-aksens enhed</b>.</li>
+          <li><b>Skæringen</b> <i>b</i> har y-aksens enhed.</li>
+          <li><b>R²</b> viser, hvor tæt punkterne ligger på linjen. Jo tættere på 1, jo bedre passer en ret linje.</li>
+        </ul>
+        <div class="example">
+          <p>I eksemplet står der <b>y = 19,95x + 0,0024</b> og <b>R² = 0,9998</b>. Med symboler og enheder bliver det:</p>
+          <p class="calc"><i>F</i> = 19,95 N/m · Δ<i>x</i> + 0,0024 N</p>
+          <p>Hældningen er fjederkonstanten <i>k</i> = 19,95 N/m, og skæringen 0,0024 N er meget tæt på 0, som teorien siger.</p>
+        </div>
+        <p>Kopiér til sidst grafen ind i dit dokument, og skriv en <b>figurtekst</b> under.</p>
+      </div>
+      <figure class="shot">
+        <div class="shot-img" style="--iw:723;--ih:434">
+          <img src="billeder/punktdiagram-trin-7.png" width="723" height="434" alt="Det færdige punktdiagram med stiplet tendenslinje, ligningen y = 19,95x + 0,0024 og R² = 0,9998.">
+          <span class="hl" style="--x:476;--y:50;--w:152;--h:47"></span>
+        </div>
+      </figure>
+    </article>
+
+  </div>
+  </main>
+
+  <footer>Samme fremgangsmåde virker, hver gang du vil undersøge, om to størrelser har en lineær sammenhæng.</footer>
+</div>
+<script src="../assets/site.js"></script>
+<script src="../assets/guide.js"></script>
+</body>
+</html>

@@ -13,8 +13,8 @@ $xl.UseSystemSeparators = $false; $xl.DecimalSeparator = ","; $xl.ThousandsSepar
 try {
   $wb = $xl.Workbooks.Add()
   $ws = $wb.Worksheets.Item(1)
-  $ws.Cells.Item(1, 1).Value2 = "Δx (m)"
-  $ws.Cells.Item(1, 2).Value2 = "F (N)"
+  $ws.Cells.Item(1, 1).Value2 = "Δx / m"
+  $ws.Cells.Item(1, 2).Value2 = "F / N"
   for ($i = 0; $i -lt $dx.Count; $i++) {
     $ws.Cells.Item($i + 2, 1).Value2 = [double]$dx[$i]
     $ws.Cells.Item($i + 2, 2).Value2 = [double]$F[$i]
@@ -50,11 +50,11 @@ try {
   $ax = $ch.Axes(1)                # x
   $ax.MinimumScale = 0; $ax.MaximumScale = 0.16; $ax.MajorUnit = 0.02
   $ax.TickLabels.NumberFormat = "0.00"
-  $ax.HasTitle = $true; $ax.AxisTitle.Text = "Forlængelse Δx (m)"
+  $ax.HasTitle = $true; $ax.AxisTitle.Text = "Forlængelse Δx / m"
   $ay = $ch.Axes(2)                # y
   $ay.MinimumScale = 0; $ay.MaximumScale = 3.5; $ay.MajorUnit = 0.5
   $ay.TickLabels.NumberFormat = "0,0"   # (med kommaseparator giver dette 3,5 — testet)
-  $ay.HasTitle = $true; $ay.AxisTitle.Text = "Kraft F (N)"
+  $ay.HasTitle = $true; $ay.AxisTitle.Text = "Kraft F / N"
   $ay.HasMajorGridlines = $true
   $ay.MajorGridlines.Format.Line.ForeColor.RGB = 0xE0E0E0
 

@@ -9,7 +9,7 @@
   "tjekliste": { "titel": "Tjekliste til din journal", "href": "tjekliste-journal.html" },
   "seOgsaa": [
     { "type": "Tjekliste", "titel": "Tjekliste til din journal", "tekst": "Gå din egen journal igennem punkt for punkt, før du afleverer.", "href": "tjekliste-journal.html" },
-    { "type": "Guide", "titel": "Graf i Excel", "tekst": "Punktdiagram, tendenslinje og aflæsning af hældningen med enhed.", "href": "../vaerktoejer/graf-i-excel.html" },
+    { "type": "Guide", "titel": "Punktdiagram med lineær regression", "tekst": "Aksetitler, lineær tendenslinje og aflæsning af hældningen med enhed.", "href": "../vaerktoejer/punktdiagram-lineaer-regression.html" },
     { "type": "Fysik", "titel": "Alle journaler", "tekst": "Se, hvordan journalerne udvikler sig fra 1g til 3g.", "href": "./#journal" },
     { "type": "Værktøjer", "titel": "Flere guides", "tekst": "Tabeller, figurtekster og ligninger i Word og WordMat.", "href": "../vaerktoejer/" }
   ],
@@ -50,7 +50,7 @@
     {
       "start": "Tabel 1:", "slut": "2,946", "boks": true,
       "tekst": "Enhederne står i kolonneoverskriften og ikke ved hvert tal. De målte værdier (L) og de beregnede (Δx og F) står hver for sig, så man kan se, hvad I faktisk målte. Tabellen har nummer og tekst over sig.",
-      "typiskFejl": { "emne": "tabellen", "svag": "Kolonner der hedder ”vægt” og ”længde” uden enheder, og kun de beregnede tal.", "staerk": "”Masse m (g)”, ”Position L (cm)”, ”Forlængelse Δx (m)”: størrelse, symbol og enhed." }
+      "typiskFejl": { "emne": "tabellen", "svag": "Kolonner der hedder ”vægt” og ”længde” uden enheder, og kun de beregnede tal.", "staerk": "”Masse m / g”, ”Position L / cm”, ”Forlængelse Δx / m”: størrelse, symbol og enhed." }
     },
     {
       "start": "F= m⋅g= 0,150", "slut": "0,074 m", "boks": true,
@@ -60,12 +60,12 @@
       "billede": 2,
       "tekst": "Punktdiagram med aksetitler og enheder, kun punkter (ingen streger mellem dem), en lineær tendenslinje og ligningen vist. Figurteksten forklarer, hvad man ser.",
       "typiskFejl": { "emne": "grafen", "svag": "Titlen hedder ”Diagramtitel”, akserne har ingen titler, og punkterne er forbundet med en kurve.", "staerk": "Punktdiagram (XY), aksetitler med enhed, en lineær tendenslinje og ligningen vist." },
-      "guide": { "titel": "Graf i Excel", "href": "../vaerktoejer/graf-i-excel.html" }
+      "guide": { "titel": "Punktdiagram med lineær regression", "href": "../vaerktoejer/punktdiagram-lineaer-regression.html" }
     },
     {
       "start": "Punkterne ligger på en ret linje tæt på", "slut": "måleusikkerheden.",
       "tekst": "Her er kernen: du forbinder grafen med teorien. Hældningen <em>er</em> k, og du kommenterer, at linjen går gennem (0,0). Mange glemmer at sige, hvad hældningen betyder.",
-      "guide": { "titel": "Aflæs hældningen i Excel", "href": "../vaerktoejer/graf-i-excel.html#trin-5" }
+      "guide": { "titel": "Aflæs hældningen i Excel", "href": "../vaerktoejer/punktdiagram-lineaer-regression.html#aflaes-haeldningen" }
     },
     {
       "start": "Den største fejlkilde", "slut": "over linjen.",

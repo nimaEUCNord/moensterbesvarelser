@@ -14,7 +14,7 @@ Den kan også lægges på hjemmesiden https://mosskov.github.io/moensterbesvarel
    - `"billede": 0` peger på et billede i stedet (billederne tælles fra forsiden, startende med 0)
    - `"typiskFejl"` (valgfri) viser en svag og en stærk formulering under kommentaren
    - `"guide"` (valgfri) viser et link til en guide under kommentaren, fx
-     `{"titel": "Graf i Excel", "href": "../vaerktoejer/graf-i-excel.html#trin-5"}`
+     `{"titel": "Punktdiagram med lineær regression", "href": "../vaerktoejer/punktdiagram-lineaer-regression.html#aflaes-haeldningen"}`
    - Mellemrum og kursiv matematik er ligegyldige for søgningen.
    Findes dokumentet i flere versioner (fx Word og LaTeX), bygges hver version som sin egen side med sin
    egen kommentarfil. Alle kommentarfilerne får den samme liste, som giver en vælger øverst på siden:
@@ -36,7 +36,7 @@ Kræver Python med `pymupdf` (`pip install pymupdf`).
 Journalen er bygget af scripts, så den kan ændres og bygges igen:
 
 1. `powershell -File build/excel_chart.ps1`: Figur 2 som et Excel-punktdiagram (`journal/figur2-graf.png`)
-2. `node build/make_docx.js <raa.docx>`: Word-dokumentet med ligninger som pladsholdere (kræver `npm install docx`)
+2. `node build/make_docx.js <raa.docx>`: Word-dokumentet med ligninger som pladsholdere (kræver `npm install` første gang)
 3. `powershell -File build/finish_word.ps1 <raa.docx> "journal/Hookes lov - journal"`: Word laver
    ligningerne om til rigtige Word-ligninger (som WordMat), opdaterer indholdsfortegnelsen og gemmer .docx og .pdf
 4. `python build/build_html.py`
@@ -53,7 +53,7 @@ Hjemmesiden er repoet `Mosskov/moensterbesvarelser`. Forsiden `index.html` viser
 Hvert fag har sin egen mappe med en fagside (fx `fysik/index.html`), der viser fagets dokumenter.
 Fælles stil og temaknapper ligger i `assets/site.css` og `assets/site.js`.
 Guiderne (Word, Excel, WordMat) ligger i `vaerktoejer/` og er almindelige, håndskrevne HTML-sider, der ikke bygges.
-De bruger `assets/guide.css` (trin og tegnede Excel-skærme). En ny guide erstatter et "Kommer snart"-kort på
+De bruger `assets/guide.css` og `assets/guide.js` (ét trin ad gangen) og skærmbilleder i `vaerktoejer/billeder/`. En ny guide erstatter et "Kommer snart"-kort på
 `vaerktoejer/index.html`, og journalerne linker til den med `"guide"` i kommentarfilen.
 Tjeklisterne (fx `fysik/tjekliste-journal.html`) er også håndskrevne. Der er én pr. dokumenttype, og de bruger
 `assets/tjekliste.css` og `assets/tjekliste.js`.
