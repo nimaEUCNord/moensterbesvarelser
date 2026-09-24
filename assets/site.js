@@ -32,7 +32,17 @@
       if (on && scroll) s.scrollIntoView({ block: "nearest" });
     });
   }
+  // Klik på den valgte type fravælger den igen, så kun felterne vises.
+  links.forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (a.getAttribute("aria-current") !== "true") return;
+      e.preventDefault();
+      history.pushState(null, "", location.pathname + location.search);
+      show(false);
+    });
+  });
   window.addEventListener("hashchange", function () { show(true); });
+  window.addEventListener("popstate", function () { show(false); });
   show(false);
 })();
 

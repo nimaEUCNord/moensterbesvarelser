@@ -3,7 +3,12 @@
   "docx": "journal/Hookes lov - journal.docx",
   "ud": "fysik/hookes-lov-journal.html",
   "sektion": "journal",
+  "titel": "En god journal i 1g",
+  "overlinje": "Fysik · Forsøg: Hookes lov",
+  "intro": "Se på, hvordan journalen er bygget op, ikke på fysikken. Den er skrevet af en elev i Word med WordMat. Den er ikke perfekt, men den gør det, vi leder efter, når vi retter. Læs den først, og åbn så lærerens kommentarer.",
+  "tjekliste": { "titel": "Tjekliste til din journal", "href": "tjekliste-journal.html" },
   "seOgsaa": [
+    { "type": "Tjekliste", "titel": "Tjekliste til din journal", "tekst": "Gå din egen journal igennem punkt for punkt, før du afleverer.", "href": "tjekliste-journal.html" },
     { "type": "Guide", "titel": "Graf i Excel", "tekst": "Punktdiagram, tendenslinje og aflæsning af hældningen med enhed.", "href": "../vaerktoejer/graf-i-excel.html" },
     { "type": "Fysik", "titel": "Alle journaler", "tekst": "Se, hvordan journalerne udvikler sig fra 1g til 3g.", "href": "./#journal" },
     { "type": "Værktøjer", "titel": "Flere guides", "tekst": "Tabeller, figurtekster og ligninger i Word og WordMat.", "href": "../vaerktoejer/" }

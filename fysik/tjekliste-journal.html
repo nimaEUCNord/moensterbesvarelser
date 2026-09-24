@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tjekliste til din journal – Mønsterbesvarelser</title>
+<meta name="description" content="Gå din fysikjournal igennem punkt for punkt, før du afleverer.">
+<script>
+  try { var t = localStorage.getItem("hooke-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/tjekliste.css">
+</head>
+<body>
+<div class="wrap wide">
+  <header>
+    <div>
+      <nav class="crumbs" aria-label="Brødkrummer"><a href="../">Mønsterbesvarelser</a> › <a href="./#journal">Fysik</a></nav>
+      <h1>Tjekliste til din journal</h1>
+      <p class="lede">Gå din journal igennem, før du afleverer. Dine flueben bliver gemt i denne browser, så du kan vende tilbage til listen.</p>
+    </div>
+    <div class="seg" role="group" aria-label="Tema">
+      <button type="button" data-theme-set="auto" aria-pressed="true" title="Følg enhedens indstilling">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>Auto</button>
+      <button type="button" data-theme-set="light" aria-pressed="false" title="Lyst tema">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>Lys</button>
+      <button type="button" data-theme-set="dark" aria-pressed="false" title="Mørkt tema">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Mørk</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Punkterne gælder alle journaler. Rækkefølgen bestemmer, hvilke gemte flueben der hører til hvilket punkt. -->
+    <div class="checklist" data-key="tjek-fysik-journal" data-legacy="hooke-check2">
+      <div class="cl-head">
+        <div class="progress"><div class="bar"><i></i></div><span class="cl-count">0 af 0 tjekket</span></div>
+        <div class="cl-btns">
+          <button class="btn" type="button" data-print>Udskriv</button>
+          <button class="btn" type="button" data-reset>Nulstil</button>
+        </div>
+      </div>
+      <div class="cl-groups">
+        <div class="cl-group">
+          <h2>Forside og formål</h2>
+          <label class="cl-item"><input type="checkbox"><span>Forside med titel, navn, klasse, makker og datoer</span></label>
+          <label class="cl-item"><input type="checkbox"><span>Formålet siger, hvad der undersøges, og hvad der skal bestemmes</span></label>
+        </div>
+        <div class="cl-group">
+          <h2>Teori</h2>
+          <label class="cl-item"><input type="checkbox"><span>Ligningerne er skrevet med en ligningseditor (fx WordMat) og nummererede</span></label>
+          <label class="cl-item"><input type="checkbox"><span>Alle symboler er forklaret med enheder</span></label>
+          <label class="cl-item"><input type="checkbox"><span>Antagelser er nævnt</span></label>
+        </div>
+        <div class="cl-group">
+          <h2>Materialer og fremgangsmåde</h2>
+          <label class="cl-item"><input type="checkbox"><span>Materialelisten er konkret (fx måleområde eller inddeling)</span></label>
+          <label class="cl-item"><input type="checkbox"><span>Skitse af opstillingen med figurnummer og figurtekst</span></label>
+          <label class="cl-item"><input type="checkbox"><span>Nummererede trin, så en anden kan gentage forsøget</span></label>
+        </div>
+        <div class="cl-group">
+          <h2>Data og databehandling</h2>
+          <label class="cl-item"><input type="checkbox"><span>Tabel med nummer, tekst og enheder i kolonneoverskriften</span></label>
+          <label class="cl-item"><input type="checkbox"><span>Både målte og beregnede værdier står i tabellen</span></label>
+          <label class="cl-item"><input type="checkbox"><span>Én eksempelberegning med tal og enheder</span></label>
+          <label class="cl-item"><input type="checkbox"><span>Punktdiagram (XY) med aksetitler og enheder</span></label>
+          <label class="cl-item"><input type="checkbox"><span>Tendenslinje med ligning, og hældningen er forklaret</span></label>
+        </div>
+        <div class="cl-group">
+          <h2>Diskussion og konklusion</h2>
+          <label class="cl-item"><input type="checkbox"><span>Konkrete fejlkilder, og hvordan de påvirker resultatet</span></label>
+          <label class="cl-item"><input type="checkbox"><span>Resultatet er sammenlignet med teori eller en kendt værdi</span></label>
+          <label class="cl-item"><input type="checkbox"><span>Konklusionen svarer direkte på formålet</span></label>
+          <label class="cl-item"><input type="checkbox"><span>Resultatet er skrevet med tal, enhed og usikkerhed</span></label>
+        </div>
+      </div>
+    </div>
+
+    <section class="examples" aria-labelledby="ex-h">
+      <h2 id="ex-h">Se punkterne i en rigtig journal</h2>
+      <div class="grid">
+        <a class="card" href="hookes-lov-journal.html">
+          <span class="type">1g</span>
+          <h3>Hookes lov</h3>
+          <p>Lærerens kommentarer viser, hvor journalen opfylder punkterne.</p>
+          <span class="go">Åbn journalen →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>Tjeklisten gælder alle journaler i fysik. Spørg din lærer, hvis en opgave kræver noget andet.</footer>
+</div>
+<script src="../assets/site.js"></script>
+<script src="../assets/tjekliste.js"></script>
+</body>
+</html>

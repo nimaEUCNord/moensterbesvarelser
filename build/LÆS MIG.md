@@ -22,6 +22,10 @@ Den kan også lægges på hjemmesiden https://mosskov.github.io/moensterbesvarel
    En version uden `"href"` vises som "kommer snart". Opgaveregning skal have versionerne WordMat, Maple og I hånden.
    `"sektion"` (fx `"journal"`) er fanen på fagsiden, som brødkrummen "Fysik" går tilbage til, og `"seOgsaa"` er
    en liste af links (`type`, `titel`, `tekst`, `href`), der vises nederst på siden.
+   `"titel"`, `"overlinje"` og `"intro"` er sidens overskrift, linjen over den og teksten under den. Titlen
+   beskriver dokumenttypen og niveauet (fx "En god journal i 1g"), og emnet står i overlinjen.
+   `"tjekliste"` (`titel`, `href`) linker fra værktøjslinjen til dokumenttypens fælles tjekliste, fx
+   `fysik/tjekliste-journal.html`.
 3. Kør: `python build/build_html.py build/min-kommentarfil.json`
    Kan et citat ikke findes, skriver scriptet hvilket.
 
@@ -51,6 +55,8 @@ Fælles stil og temaknapper ligger i `assets/site.css` og `assets/site.js`.
 Guiderne (Word, Excel, WordMat) ligger i `vaerktoejer/` og er almindelige, håndskrevne HTML-sider, der ikke bygges.
 De bruger `assets/guide.css` (trin og tegnede Excel-skærme). En ny guide erstatter et "Kommer snart"-kort på
 `vaerktoejer/index.html`, og journalerne linker til den med `"guide"` i kommentarfilen.
+Tjeklisterne (fx `fysik/tjekliste-journal.html`) er også håndskrevne. Der er én pr. dokumenttype, og de bruger
+`assets/tjekliste.css` og `assets/tjekliste.js`.
 GitHub bygger siden igen, hver gang der bliver pushet til `main`.
 
 1. Ret skabelonen eller kommentarfilen, og kør `python build/build_html.py ...`

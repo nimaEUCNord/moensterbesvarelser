@@ -9,7 +9,7 @@ peger på et sted i PDF'en med et citat:
 eller på et billede:  "billede": 0, 1, 2 ...  (billederne talt i rækkefølge fra forsiden).
 Mellemrum og kursiv matematik betyder ikke noget for søgningen.
 """
-import base64, io, json, os, re, sys, unicodedata
+import base64, html as H, io, json, os, re, sys, unicodedata
 import fitz  # pymupdf
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -114,10 +114,15 @@ data = {
     "docx": {"name": os.path.basename(rel(cfg["docx"])), "data": b64(rel(cfg["docx"]))} if cfg.get("docx") else None,
     # "sektion": fanen på fagsiden, som brødkrummen går tilbage til. "seOgsaa": links nederst på siden.
     "sektion": cfg.get("sektion"), "seOgsaa": cfg.get("seOgsaa", []),
+    # "tjekliste": {titel, href}, fælles tjekliste for dokumenttypen, linket fra værktøjslinjen.
+    "tjekliste": cfg.get("tjekliste"),
     # Versioner af dokumentet (fx Word / LaTeX). Uden "href" vises versionen som "kommer snart".
     "varianter": [dict(v, aktiv=v.get("href") == os.path.basename(cfg.get("ud", ""))) for v in cfg.get("varianter", [])],
 }
 tpl = open(os.path.join(ROOT, "build", "showroom-template.html"), encoding="utf-8").read()
+# Sidens overskrift: "titel" er dokumenttypen og niveauet (fx "En god journal i 1g"), ikke fysikken.
+for k in ("titel", "overlinje", "intro"):
+    tpl = tpl.replace("__" + k.upper() + "__", H.escape(cfg[k], quote=False))
 html = tpl.replace("__JOURNAL_DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/"))
 dst = rel(cfg.get("ud", "showroom.html"))
 open(dst, "w", encoding="utf-8").write(html)

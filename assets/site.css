@@ -91,6 +91,19 @@ html { scroll-behavior: smooth; }
 .doctype + .doctype { margin-top: 40px; }
 .doctype > h2 { font: 700 24px/1.2 var(--doc); margin: 0 0 4px; }
 .doctype .intro { margin: 0 0 14px; color: var(--ink-2); max-width: 62ch; }
+/* Link fra en dokumenttype til dens tjekliste, fx under Journaler */
+.checklist-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-width: min(100%, 320px); margin: 0 0 6px; padding: 12px 16px;
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; box-shadow: var(--shadow);
+  color: inherit; text-decoration: none; transition: border-color .15s;
+}
+.checklist-link:hover { border-color: var(--pen); }
+.checklist-link .ic { display: grid; color: var(--ink-2); }
+.checklist-link .ic svg { width: 20px; height: 20px; }
+.checklist-link b { font: 700 17px/1.25 var(--doc); }
+.checklist-link .arr { margin-left: auto; padding-left: 12px; color: var(--pen); font-weight: 600; }
+.examples-h { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 18px 0 10px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
 .grid.subjects { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
 
