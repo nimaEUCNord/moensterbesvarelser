@@ -19,6 +19,8 @@ const runs = (s, o = {}) => [new TextRun({ text: s, ...o })];
 const P = (s, o = {}) => new Paragraph({ children: runs(s), ...o });
 const EQ = (lin) => new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 120, after: 160 }, children: [new TextRun("§§D" + lin + "§§")] });
 const I = (lin) => "§§I" + lin + "§§";
+// Krydshenvisning til en billedtekst ("Kun mærkat og nummer"), fx R("Tabel", 1). finish_word.ps1 laver den til et felt.
+const R = (label, n) => `[[REF:${label}:${n}]]`;
 const H = (no, title, o = {}) => new Paragraph({
   heading: HeadingLevel.HEADING_1, tabStops: [{ type: TabStopType.LEFT, position: 567 }],
   children: [new TextRun(no + "\t" + title)], ...o,
@@ -135,6 +137,7 @@ const doc = new Document({
       bullet("Loddeholder og 6 lodder à 50 g"),
       bullet("Lineal, 30 cm med mm-inddeling"),
       bullet("Viser (en tynd ståltråd tapet fast under loddeholderen)"),
+      P(`${R("Figur", 1)} viser opstillingen.`, { spacing: { before: 120 } }),
       img("figur1-skitse.png", 250, 259),
       caption("Figur", "Opstillingen. Viserens position L aflæses på linealen, og forlængelsen er Δx = L − L₀.", { alignment: AlignmentType.CENTER }),
 
@@ -146,7 +149,7 @@ const doc = new Document({
       step(`Til sidst fjernes lodderne, og vi tjekker, at viseren er tilbage ved ${I("L_0")}. Så ved vi, at fjederen ikke er blevet strakt for meget.`),
 
       H("5", "Måleresultater"),
-      P(`Startpositionen var ${I('L_0=12,3" cm"')}. Tabellen viser de målte positioner og de beregnede værdier.`),
+      P(`Startpositionen var ${I('L_0=12,3" cm"')}. ${R("Tabel", 1)} viser de målte positioner og de beregnede værdier.`),
       caption("Tabel", "Målte og beregnede værdier. L er aflæst med en usikkerhed på ±0,1 cm.", { keepNext: true, spacing: { before: 120, after: 80 } }),
       dataTable,
 
@@ -154,7 +157,7 @@ const doc = new Document({
       P(`Kraften er beregnet med (2), og forlængelsen er beregnet som ${I("Δx=L-L_0")} og omregnet til meter. Eksempel med 150 g, beregnet med WordMat:`),
       EQ('F=m⋅g=0,150" kg"⋅9,82" m"∕"s"^2 =1,473" N"'),
       EQ('Δx=L-L_0=19,7" cm"-12,3" cm"=7,4" cm"=0,074" m"'),
-      P(`Grafen viser ${I("F")} som funktion af ${I("Δx")}. Vi har lavet et punktdiagram med en lineær tendenslinje i Excel.`, { keepNext: true }),
+      P(`${R("Figur", 2)} viser ${I("F")} som funktion af ${I("Δx")}. Vi har lavet et punktdiagram med en lineær tendenslinje i Excel.`, { keepNext: true }),
       // Pladsholder: finish_word.ps1 sætter et rigtigt diagram ind her (med data integreret i dokumentet).
       new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 120, after: 60 }, keepNext: true, children: [new TextRun("[[GRAF]]")] }),
       caption("Figur", "Kraften F som funktion af forlængelsen Δx. Punkterne er målinger, og den stiplede linje er den lineære tendenslinje.", { alignment: AlignmentType.CENTER }),

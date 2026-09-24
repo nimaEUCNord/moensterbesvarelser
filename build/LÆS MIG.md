@@ -40,7 +40,8 @@ Journalen er bygget af scripts, så den kan ændres og bygges igen:
 1. `node build/make_docx.js <raa.docx>`: Word-dokumentet med ligninger som pladsholdere (kræver `npm install` første gang)
 2. `powershell -File build/finish_word.ps1 <raa.docx> "journal/Hookes lov - journal"`: Word laver
    ligningerne om til rigtige Word-ligninger (som WordMat), sætter Figur 2 ind som et rigtigt diagram med
-   integreret projektmappe, opdaterer indholdsfortegnelsen og gemmer .docx og .pdf. Excels decimaltegn
+   integreret projektmappe, formaterer datatabellen som i guiden "Tabel i Word", laver `[[REF:Figur:2]]` om til
+   krydshenvisninger, opdaterer indholdsfortegnelsen og gemmer .docx og .pdf. Excels decimaltegn
    sættes til komma under kørslen og stilles tilbage bagefter.
 3. `python build/build_html.py`
 

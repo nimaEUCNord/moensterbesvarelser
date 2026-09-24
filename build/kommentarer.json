@@ -41,17 +41,23 @@
     },
     {
       "billede": 1,
-      "tekst": "En skitse med navne på delene siger mere end mange linjer tekst. Figuren har nummer og en figurtekst, der forklarer, hvad man ser (Referencer → Indsæt billedtekst i Word)."
+      "tekst": "En skitse med navne på delene siger mere end mange linjer tekst."
     },
     {
       "start": "Fjederen hænges i stativet", "slut": "strakt for meget.", "boks": true,
       "tekst": "Nummererede trin, der er så præcise, at en anden kunne gentage forsøget. Smart at bruge en viser og måle Δx ud fra startpositionen. Og trin 5 tjekker faktisk jeres antagelse fra teorien!"
     },
     {
-      "start": "Tabel 1:", "slut": "2,946", "boks": true,
-      "tekst": "Enhederne står i kolonneoverskriften og ikke ved hvert tal. De målte værdier (L) og de beregnede (Δx og F) står hver for sig, så man kan se, hvad I faktisk målte. Tabellen har nummer og tekst over sig.",
+      "start": "Tabel 1: Målte", "slut": "±0,1 cm.",
+      "tekst": "Tabelteksten står over tabellen og siger, hvad den viser: hvad der er målt, hvad der er beregnet, og hvor præcist. Figurteksterne står under figurerne. I teksten henviser du med ”Tabel 1 viser …”, lavet som en krydshenvisning, så nummeret passer, selvom du flytter rundt.",
+      "typiskFejl": { "emne": "tabel- og figurtekster", "svag": "Ingen tekst, eller kun ”Tabel” og ”Graf”, og i teksten står der ”tabellen nedenfor”.", "staerk": "”Tabel 1: Målte og beregnede værdier. L er aflæst med en usikkerhed på ±0,1 cm.” og ”Tabel 1 viser …” i teksten." },
+      "guide": { "titel": "Tabel- og figurtekster", "href": "../vaerktoejer/tabel-og-figurtekster.html" }
+    },
+    {
+      "start": "Masse m / g", "slut": "2,946", "boks": true,
+      "tekst": "Enhederne står i kolonneoverskriften og ikke ved hvert tal. De målte værdier (L) og de beregnede (Δx og F) står hver for sig, så man kan se, hvad I faktisk målte.",
       "typiskFejl": { "emne": "tabellen", "svag": "Kolonner der hedder ”vægt” og ”længde” uden enheder, og kun de beregnede tal.", "staerk": "”Masse m / g”, ”Position L / cm”, ”Forlængelse Δx / m”: størrelse, symbol og enhed." },
-      "guide": { "titel": "Tabel med tabeltekst", "href": "../vaerktoejer/tabel-med-tabeltekst.html" }
+      "guide": { "titel": "Tabel i Word", "href": "../vaerktoejer/tabel-i-word.html" }
     },
     {
       "start": "F= m⋅g= 0,150", "slut": "0,074 m", "boks": true,
@@ -59,7 +65,7 @@
     },
     {
       "figur": 2,
-      "tekst": "Punktdiagram med aksetitler og enheder, kun punkter (ingen streger mellem dem), en lineær tendenslinje og ligningen vist. Figurteksten forklarer, hvad man ser.",
+      "tekst": "Punktdiagram med aksetitler og enheder, kun punkter (ingen streger mellem dem), en lineær tendenslinje og ligningen vist.",
       "typiskFejl": { "emne": "grafen", "svag": "Titlen hedder ”Diagramtitel”, akserne har ingen titler, og punkterne er forbundet med en kurve.", "staerk": "Punktdiagram (XY), aksetitler med enhed, en lineær tendenslinje og ligningen vist." },
       "guide": { "titel": "Punktdiagram med lineær regression", "href": "../vaerktoejer/punktdiagram-lineaer-regression.html" }
     },

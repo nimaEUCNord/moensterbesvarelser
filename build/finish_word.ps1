@@ -99,6 +99,24 @@ function Format-Datatabel($doc) {
   $t.Range.Cells.VerticalAlignment = 1                           # og lodret
 }
 
+# Krydshenvisninger: [[REF:Tabel:1]] bliver til et felt med "Kun mærkat og nummer" (Referencer →
+# Krydshenvisning), som Word selv holder opdateret. Billedteksternes numre skal være opdateret først.
+function Add-Krydshenvisninger($doc) {
+  $n = 0
+  while ($true) {
+    $r = $doc.Content
+    if (-not $r.Find.Execute("[[REF:")) { break }
+    $end = $doc.Range($r.End, $doc.Content.End)
+    if (-not $end.Find.Execute("]]")) { throw "Mangler ]] efter [[REF:" }
+    $full = $doc.Range($r.Start, $end.End)
+    $parts = $full.Text.Trim("[", "]").Split(":")    # REF, Tabel, 1
+    $full.Text = ""
+    $full.InsertCrossReference($parts[1], 3, [int]$parts[2], $false)   # 3 = wdOnlyLabelAndNumber
+    $n++
+  }
+  return $n
+}
+
 $oldSep = Set-ExcelSeparators $false "," "."
 $word = New-Object -ComObject Word.Application
 $word.Visible = $false
@@ -130,6 +148,8 @@ try {
   Add-Figur2 $doc
   Start-Sleep 3   # Word er optaget et øjeblik, mens diagrammet tegnes
   "Figur 2: diagram indsat"
+  $doc.Fields.Update() | Out-Null
+  "Krydshenvisninger: " + (Add-Krydshenvisninger $doc)
   $doc.Fields.Update() | Out-Null
   foreach ($toc in $doc.TablesOfContents) { $toc.Update() }
   $doc.Repaginate()
