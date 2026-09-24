@@ -1,13 +1,24 @@
-// Temaknapper (Auto/Lys/Mørk). Samme localStorage-nøgle som journalsiderne, så valget følger med.
+// Temaknap i topbjælken: skifter Auto → Lys → Mørk. Samme localStorage-nøgle som journalsiderne, så valget følger med.
 (function () {
-  var root = document.documentElement, btns = document.querySelectorAll("[data-theme-set]");
+  var root = document.documentElement, btn = document.getElementById("theme");
+  if (!btn) return;
+  var ICONS = {
+    auto: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>',
+    light: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>',
+    dark: '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>'
+  };
+  var NAMES = { auto: "Auto (følger enheden)", light: "Lys", dark: "Mørk" }, NEXT = { auto: "light", light: "dark", dark: "auto" };
+  var theme = root.getAttribute("data-theme") || "auto";
   function setTheme(t) {
+    theme = t;
     if (t === "auto") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", t);
-    btns.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-theme-set") === t); });
+    btn.innerHTML = ICONS[t];
+    btn.title = "Tema: " + NAMES[t] + ". Klik for at skifte.";
+    btn.setAttribute("aria-label", btn.title);
     try { localStorage.setItem("hooke-theme", t); } catch (e) {}
   }
-  btns.forEach(function (b) { b.addEventListener("click", function () { setTheme(b.getAttribute("data-theme-set")); }); });
-  setTheme(root.getAttribute("data-theme") || "auto");
+  btn.addEventListener("click", function () { setTheme(NEXT[theme]); });
+  setTheme(theme);
 })();
 
 // Typefelter på fag- og værktøjssiden: kun den valgte types kort vises, styret af #hash,

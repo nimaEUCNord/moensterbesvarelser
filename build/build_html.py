@@ -112,7 +112,7 @@ data = {
     "pages": pages, "comments": out,
     "pdf": {"name": os.path.basename(pdf_path), "data": b64(pdf_path)},
     "docx": {"name": os.path.basename(rel(cfg["docx"])), "data": b64(rel(cfg["docx"]))} if cfg.get("docx") else None,
-    # "sektion": fanen på fagsiden, som brødkrummen går tilbage til. "seOgsaa": links nederst på siden.
+    # "sektion": fanen på fagsiden, som "Fysik" i topbjælken går tilbage til. "seOgsaa": links nederst på siden.
     "sektion": cfg.get("sektion"), "seOgsaa": cfg.get("seOgsaa", []),
     # "tjekliste": {titel, href}, fælles tjekliste for dokumenttypen, linket fra værktøjslinjen.
     "tjekliste": cfg.get("tjekliste"),

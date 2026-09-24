@@ -67,7 +67,7 @@ const dataTable = new Table({
 const header = new Header({ children: [new Paragraph({
   tabStops: [{ type: TabStopType.RIGHT, position: TabStopPosition.MAX }],
   border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: "BFBFBF", space: 4 } },
-  children: [new TextRun({ text: "Freja Madsen, 1.x · Fysik C", size: 18, color: "7F7F7F" }), new TextRun({ text: "\tHookes lov – journal", size: 18, color: "7F7F7F" })],
+  children: [new TextRun({ text: "Freja Madsen, 1.x · Fysik", size: 18, color: "7F7F7F" }), new TextRun({ text: "\tHookes lov – journal", size: 18, color: "7F7F7F" })],
 }) ] });
 const footer = new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [
   new TextRun({ children: ["Side ", PageNumber.CURRENT, " af ", PageNumber.TOTAL_PAGES], size: 18, color: "7F7F7F" }),
@@ -101,13 +101,13 @@ const doc = new Document({
     footers: { default: footer, first: new Footer({ children: [new Paragraph("")] }) },
     children: [
       // ---------------- Forside
-      new Paragraph({ spacing: { before: 2400, after: 200 }, children: [new TextRun({ text: "FYSIK C · JOURNAL", size: 20, color: "2F5496", bold: true, characterSpacing: 40 })] }),
+      new Paragraph({ spacing: { before: 2400, after: 200 }, children: [new TextRun({ text: "FYSIK · JOURNAL", size: 20, color: "2F5496", bold: true, characterSpacing: 40 })] }),
       new Paragraph({ style: "Title", children: [new TextRun("Bestemmelse af fjederkonstanten for en skruefjeder")] }),
       new Paragraph({ style: "Subtitle", border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: "2F5496", space: 12 } }, children: [new TextRun("Hookes lov undersøgt med lodder og en lineal")] }),
       img("figur1-skitse.png", 190, 197),
       new Paragraph({ spacing: { before: 1400 }, children: [] }),
       new Table({ width: { size: 9026, type: WidthType.DXA }, columnWidths: [2600, 6426], rows: [
-        infoRow("Navn", "Freja Madsen"), infoRow("Klasse", "1.x, fysik C"), infoRow("Makker", "Ali Hassan"),
+        infoRow("Navn", "Freja Madsen"), infoRow("Klasse", "1.x, fysik"), infoRow("Makker", "Ali Hassan"),
         infoRow("Forsøget udført", "10. september 2026"), infoRow("Afleveret", "17. september 2026"),
       ] }),
       new Paragraph({ children: [new PageBreak()] }),

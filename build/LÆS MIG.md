@@ -18,9 +18,9 @@ Den kan også lægges på hjemmesiden https://mosskov.github.io/moensterbesvarel
    - Mellemrum og kursiv matematik er ligegyldige for søgningen.
    Findes dokumentet i flere versioner (fx Word og LaTeX), bygges hver version som sin egen side med sin
    egen kommentarfil. Alle kommentarfilerne får den samme liste, som giver en vælger øverst på siden:
-   `"varianter": [{"navn": "Word + WordMat", "href": "hookes-lov-journal.html"}, {"navn": "LaTeX"}]`
+   `"varianter": [{"navn": "Word + WordMat + Excel", "href": "hookes-lov-journal.html"}, {"navn": "LaTeX"}]`
    En version uden `"href"` vises som "kommer snart". Opgaveregning skal have versionerne WordMat, Maple og I hånden.
-   `"sektion"` (fx `"journal"`) er fanen på fagsiden, som brødkrummen "Fysik" går tilbage til, og `"seOgsaa"` er
+   `"sektion"` (fx `"journal"`) er fanen på fagsiden, som "Fysik" i topbjælken går tilbage til, og `"seOgsaa"` er
    en liste af links (`type`, `titel`, `tekst`, `href`), der vises nederst på siden.
    `"titel"`, `"overlinje"` og `"intro"` er sidens overskrift, linjen over den og teksten under den. Titlen
    beskriver dokumenttypen og niveauet (fx "En god journal i 1g"), og emnet står i overlinjen.

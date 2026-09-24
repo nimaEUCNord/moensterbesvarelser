@@ -78,18 +78,34 @@ a { color: var(--pen); }
 h1, h2, h3 { text-wrap: balance; }
 .wrap { max-width: 1200px; margin-inline: auto; }
 
+/* ---------- Topbjælke (samme som i assets/site.css) ---------- */
+.sitebar { margin-inline: -16px; padding: 0 16px; background: var(--paper); border-bottom: 1px solid var(--rule); }
+.sitebar .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; min-height: 52px; padding-block: 8px; }
+.brand { font: 700 17px/1.2 var(--doc); color: var(--ink); text-decoration: none; padding: 6px 10px; margin-left: -10px; border-radius: 6px; }
+.brand:hover { background: var(--rule-soft); }
+.brand[aria-current] { color: var(--pen); background: var(--pen-soft); }
+.sitenav { display: flex; gap: 2px; }
+.sitenav a { color: var(--ink-2); font-size: 14px; font-weight: 600; text-decoration: none; padding: 6px 10px; border-radius: 6px; }
+.sitenav a:hover { background: var(--rule-soft); color: var(--ink); }
+.sitenav a[aria-current] { color: var(--pen); background: var(--pen-soft); }
+.theme-btn { margin-left: auto; display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 1px solid var(--rule); border-radius: 7px; background: var(--paper); color: var(--ink-2); cursor: pointer; }
+.theme-btn:hover { color: var(--ink); border-color: var(--muted); }
+.theme-btn svg { width: 16px; height: 16px; }
+@media (max-width: 420px) {
+  .sitebar .wrap { gap: 4px 6px; }
+  .brand { font-size: 15px; padding: 6px 7px; margin-left: -7px; }
+  .sitenav a { font-size: 13px; padding: 6px 7px; }
+}
+
 /* ---------- Kompakt hoved ---------- */
 .head { padding-block: 28px 20px; }
-.crumbs { font-size: 14px; font-weight: 600; color: var(--muted); margin: 0 0 12px; }
-.crumbs a { text-decoration: none; }
-.crumbs a:hover { text-decoration: underline; }
 .head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 40px; flex-wrap: wrap; }
 .eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 0 6px; }
 .head h1 { font-family: var(--doc); font-size: clamp(28px, 3.6vw, 38px); line-height: 1.12; margin: 0 0 10px; font-weight: 700; letter-spacing: -.01em; }
 .head .lead { margin: 0; color: var(--ink-2); font-size: 15.5px; max-width: 64ch; }
 .head-side { display: grid; gap: 10px; justify-items: end; }
 .variants-row { display: flex; align-items: center; gap: 8px 10px; }
-.variants-row .vl { font-size: 13px; font-weight: 600; color: var(--muted); }
+.variants-row .vl { font-size: 13px; font-weight: 600; color: var(--muted); white-space: nowrap; }
 .seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 7px; overflow: hidden; background: var(--paper); }
 .variants a, .variants span { font: 500 13px var(--sans); color: var(--ink-2); padding: 6px 12px; text-decoration: none; display: inline-flex; align-items: baseline; gap: 6px; }
 .variants > * + * { border-left: 1px solid var(--rule); }
@@ -245,7 +261,7 @@ footer { max-width: 1200px; margin: 40px auto 0; padding-block: 20px 36px; color
 }
 @media print {
   body { background: #fff; padding: 0; }
-  .toolbar, .rail, .actions, .marker, .lead-line, .hl-rect { display: none !important; }
+  .sitebar, .toolbar, .rail, .actions, .marker, .lead-line, .hl-rect { display: none !important; }
   .viewer { display: block; border: 0; background: #fff; padding: 0; }
   .page { box-shadow: none; break-after: page; }
 }
@@ -253,8 +269,15 @@ footer { max-width: 1200px; margin: 40px auto 0; padding-block: 20px 36px; color
 </head>
 <body>
 
+<div class="sitebar">
+  <div class="wrap">
+    <a class="brand" href="../">Mønsterbesvarelser</a>
+    <nav class="sitenav" aria-label="Hovedmenu"><a href="./" id="nav-fag" aria-current="true">Fysik</a><a href="../vaerktoejer/">Værktøjer</a></nav>
+    <button class="theme-btn" type="button" id="theme" aria-label="Tema"></button>
+  </div>
+</div>
+
 <header class="wrap head">
-  <nav class="crumbs" aria-label="Brødkrummer"><a href="../">Mønsterbesvarelser</a> › <a href="./" id="crumb-fag">Fysik</a></nav>
   <div class="head-row">
     <div>
       <p class="eyebrow">__OVERLINJE__</p>
@@ -283,7 +306,6 @@ footer { max-width: 1200px; margin: 40px auto 0; padding-block: 20px 36px; color
         <span id="toggle-label">Skjul kommentarer</span>
       </button>
       <button class="btn primary" type="button" id="start-tour">Gennemgå kommentarerne</button>
-      <button class="btn icon" type="button" id="theme" aria-label="Tema"></button>
     </div>
   </div>
 </div>
@@ -305,7 +327,7 @@ footer { max-width: 1200px; margin: 40px auto 0; padding-block: 20px 36px; color
 </section>
 </main>
 
-<footer>Journalen er et konstrueret eksempel til undervisningsbrug. Navne og måledata er opdigtede, men realistiske.</footer>
+<footer>Journalen er en lettere redigeret elevjournal til undervisningsbrug. Navnene er opdigtede.</footer>
 
 <script id="journal-data" type="application/json">__JOURNAL_DATA__</script>
 <script>
@@ -323,7 +345,7 @@ footer { max-width: 1200px; margin: 40px auto 0; padding-block: 20px 36px; color
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
   var J = JSON.parse($("journal-data").textContent);
-  if (J.sektion) $("crumb-fag").href = "./#" + J.sektion;
+  if (J.sektion) $("nav-fag").href = "./#" + J.sektion;
   if (J.tjekliste) {
     var tl = $("tjekliste-link");
     tl.href = J.tjekliste.href; tl.querySelector("span").textContent = J.tjekliste.titel; tl.hidden = false;
@@ -510,7 +532,7 @@ footer { max-width: 1200px; margin: 40px auto 0; padding-block: 20px 36px; color
   tgl.addEventListener("click", function () { setComments(tgl.getAttribute("aria-pressed") !== "true"); });
   setComments(store("hooke-markers") !== false);
 
-  /* ================= Tema: én knap, der skifter Auto → Lys → Mørk ================= */
+  /* ================= Tema: knappen i topbjælken skifter Auto → Lys → Mørk ================= */
   var ICONS = {
     auto: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>',
     light: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>',

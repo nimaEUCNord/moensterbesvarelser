@@ -14,7 +14,7 @@
     { "type": "Værktøjer", "titel": "Flere guides", "tekst": "Tabeller, figurtekster og ligninger i Word og WordMat.", "href": "../vaerktoejer/" }
   ],
   "varianter": [
-    { "navn": "Word + WordMat", "href": "hookes-lov-journal.html" },
+    { "navn": "Word + WordMat + Excel", "href": "hookes-lov-journal.html" },
     { "navn": "LaTeX" }
   ],
   "kommentarer": [

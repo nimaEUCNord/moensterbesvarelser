@@ -11,23 +11,16 @@
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+<div class="sitebar">
+  <div class="wrap">
+    <a class="brand" href="./" aria-current="page">Mønsterbesvarelser</a>
+    <nav class="sitenav" aria-label="Hovedmenu"><a href="fysik/">Fysik</a><a href="vaerktoejer/">Værktøjer</a></nav>
+    <button class="theme-btn" type="button" id="theme" aria-label="Tema"></button>
+  </div>
+</div>
 <div class="wrap">
-  <header>
-    <div>
-      <h1>Mønsterbesvarelser</h1>
-      <p class="lede">Eksempler på gode afleveringer med lærerens kommentarer. Vælg et fag, eller find en guide under Værktøjer.</p>
-    </div>
-    <div class="seg" role="group" aria-label="Tema">
-      <button type="button" data-theme-set="auto" aria-pressed="true" title="Følg enhedens indstilling">
-        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>Auto</button>
-      <button type="button" data-theme-set="light" aria-pressed="false" title="Lyst tema">
-        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>Lys</button>
-      <button type="button" data-theme-set="dark" aria-pressed="false" title="Mørkt tema">
-        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Mørk</button>
-    </div>
-  </header>
-
   <main>
+    <h1 class="sr">Mønsterbesvarelser</h1>
     <!-- Et kort pr. fag. Et fag uden dokumenter er et <div class="card soon">; når det får en fagside, bliver det et <a class="card" href="fag/">. -->
     <div class="grid subjects">
       <a class="card" href="fysik/">
