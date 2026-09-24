@@ -49,7 +49,7 @@ Skitsen `journal/figur1-skitse.png` er et skærmbillede af `build/figur1-skitse.
 
 ## Publicering (GitHub Pages)
 
-Første gang (ikke gjort endnu). Siden udgives fra arbejdskontoen nimaEUCNord, så skift først med `gh auth switch -u nimaEUCNord`:
+Første gang (gjort 2026-09-24, står her til reference). Siden udgives fra arbejdskontoen nimaEUCNord (`gh auth switch -u nimaEUCNord`). Repoet har `credential.https://github.com.username nimaEUCNord`, så `git push` bruger altid arbejdskontoen:
 `gh repo create nimaEUCNord/moensterbesvarelser --public --source . --push` og derefter
 `gh api -X POST repos/nimaEUCNord/moensterbesvarelser/pages -f "source[branch]=main" -f "source[path]=/"`
 
